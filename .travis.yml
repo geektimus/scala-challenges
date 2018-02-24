@@ -1,0 +1,13 @@
+language: scala
+scala:
+   - 2.12.4
+
+# blocklist
+branches:
+  except:
+  - /^feature.*$/
+
+# safelist
+branches:
+  only:
+  - master
