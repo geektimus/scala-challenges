@@ -1,5 +1,7 @@
 # Scala Challenges
 
+[![Build Status](https://travis-ci.org/geektimus/scala-challenges.svg?branch=master)](https://travis-ci.org/geektimus/scala-challenges)
+
 This repo will contain the solutions using Scala for challenges found on:
 
 * Books
