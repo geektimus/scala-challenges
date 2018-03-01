@@ -1,4 +1,4 @@
-package com.codingmaniacs.challenges
+package com.codingmaniacs.codility
 
 import org.scalatest.{FlatSpec, Matchers}
 

@@ -1,4 +1,4 @@
-package com.codingmaniacs.challenges
+package com.codingmaniacs.codility
 
 object CollectionChallenges {
   /**
