@@ -52,4 +52,39 @@ class CollectionChallengesSpec extends FlatSpec with Matchers {
     val missingInteger = CollectionChallenges.findMissingInt(numbers)
     assert(missingInteger == expected)
   }
+
+  "On an array containing one element, that element" should "be the unpaired one" in {
+    val numbers = Array(3)
+    val expected = 3
+    val unpairedNumber = CollectionChallenges.findUnpairedElement(numbers)
+    assert(unpairedNumber == expected)
+  }
+
+  "On an array containing three elements [1,2,2], the unpaired element" should "be [1]" in {
+    val numbers = Array(1, 2, 2)
+    val expected = 1
+    val unpairedNumber = CollectionChallenges.findUnpairedElement(numbers)
+    assert(unpairedNumber == expected)
+  }
+
+  "On an array containing seven elements [1,1,3,4,2,2,4], the unpaired element" should "be [3]" in {
+    val numbers = Array(1, 1, 3, 4, 2, 2, 4)
+    val expected = 3
+    val unpairedNumber = CollectionChallenges.findUnpairedElement(numbers)
+    assert(unpairedNumber == expected)
+  }
+
+  "On an array containing eleven elements [4,4,2,2,5,1,1,1,1,4,4], the unpaired element" should "be [5]" in {
+    val numbers = Array(4, 4, 2, 2, 5, 1, 1, 1, 1, 4, 4)
+    val expected = 5
+    val unpairedNumber = CollectionChallenges.findUnpairedElement(numbers)
+    assert(unpairedNumber == expected)
+  }
+
+  "On an array containing nine elements [4,3,2,1,5,1,2,3,4], the unpaired element" should "be [5]" in {
+    val numbers = Array(4, 3, 2, 1, 5, 1, 2, 3, 4)
+    val expected = 5
+    val unpairedNumber = CollectionChallenges.findUnpairedElement(numbers)
+    assert(unpairedNumber == expected)
+  }
 }
