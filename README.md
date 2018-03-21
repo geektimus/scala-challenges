@@ -10,6 +10,12 @@ This repo will contain the solutions using Scala for challenges found on:
 * CodeFights
 
 ## Challenges
+### Hacker Rank
+#### Super Reduced String
+
+Write a function to reduce a given string to its shortest length by doing a series of 
+operations in which we select a pair of adjacent lowercase letters that match, 
+and then we delete them.
 
 ### Codility
 #### Missing Integer
