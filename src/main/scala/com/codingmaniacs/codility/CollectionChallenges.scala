@@ -36,4 +36,19 @@ object CollectionChallenges {
   def findUnpairedElement(ns: Array[Int]): Int = {
     ns.foldLeft(0)((x, y) => x ^ y)
   }
+
+  /**
+   * Finds the minimum difference (Tape Equilibrium) on an array
+   * 
+   * @param ns Number array (Tape)
+   * @return 
+   */
+  def findTapeEquilibrium(ns: Array[Int]): Int = {
+    val total = ns.sum
+    val m = for (
+      i <- 1 until ns.length;
+      r <- Some(Math.abs((ns.slice(0, i).sum * 2)  - total))
+    ) yield r
+    m.min
+  }
 }
