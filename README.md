@@ -10,19 +10,24 @@ This repo will contain the solutions using Scala for challenges found on:
 * CodeFights
 
 ## Challenges
+
 ### Hacker Rank
+
 #### Super Reduced String
 
-Write a function to reduce a given string to its shortest length by doing a series of 
-operations in which we select a pair of adjacent lowercase letters that match, 
+Write a function to reduce a given string to its shortest length by doing a series of
+operations in which we select a pair of adjacent lowercase letters that match,
 and then we delete them.
 
 ### Codility
+
 #### Missing Integer
+
 Find smallest positive integer that is NOT in the given array:
 
-Example: 
-```
+Example:
+
+```text
 for [1, 3, 6, 4, 1, 2] the missing integer is [5]
 for [4, 1, 5, 6, 2] the missing integer is [3]
 ```
@@ -32,11 +37,14 @@ We need to find the minimum number of jumps a small frog can make from a startin
 given a jump distance D
 
 ### Others (Challenges proposed by Friends or Solved on hackatons)
+
 #### Recursively reverse a string
+
 Given a string, reverse the characters and return.
 
 Example:
-```
+
+```text
 for "Test" it should return "tseT"
 for "Return" it should return "nruteR"
 ```
