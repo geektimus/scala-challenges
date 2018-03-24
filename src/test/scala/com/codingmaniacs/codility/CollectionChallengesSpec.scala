@@ -88,31 +88,38 @@ class CollectionChallengesSpec extends FlatSpec with Matchers {
     assert(unpairedNumber == expected)
   }
 
-  "On an array containing [2,6], the minimum difference" should "be 3" in {
-    val numbers = Array(2,6)
+  "On an array containing [1,1], the minimum difference" should "be 0" in {
+    val numbers = Array(1, 1)
+    val expected = 0
+    val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
+    assert(equilibrium == expected)
+  }
+
+  "On an array containing [2,6], the minimum difference" should "be 4" in {
+    val numbers = Array(2, 6)
     val expected = 4
     val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
-    assert(expected == equilibrium)
+    assert(equilibrium == expected)
   }
 
   "On an array containing [55,10,45], the minimum difference" should "be 0" in {
-    val numbers = Array(55,10,45)
+    val numbers = Array(55, 10, 45)
     val expected = 0
     val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
-    assert(expected == equilibrium)
+    assert(equilibrium == expected)
   }
 
   "On an array containing [3,1,2,4,3], the minimum difference" should "be 1" in {
-    val numbers = Array(3,1,2,4,3)
+    val numbers = Array(3, 1, 2, 4, 3)
     val expected = 1
     val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
-    assert(expected == equilibrium)
+    assert(equilibrium == expected)
   }
 
   "On an array containing [-1000, 1000], the minimum difference" should "be 2000" in {
     val numbers = Array(-1000, 1000)
     val expected = 2000
     val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
-    assert(expected == equilibrium)
+    assert(equilibrium == expected)
   }
 }
