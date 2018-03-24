@@ -31,6 +31,10 @@ Example:
 for [1, 3, 6, 4, 1, 2] the missing integer is [5]
 for [4, 1, 5, 6, 2] the missing integer is [3]
 ```
+#### Tape Equilibrium
+Given a non-empty zero-indexed array A of N integers, returns the minimal difference 
+that can be achieved after we split the array on a pivot P. Such as 
+```|(A[0] + A[1] + ... + A[P − 1]) − (A[P] + A[P + 1] + ... + A[N − 1])|```
 
 #### Frog Jumps
 We need to find the minimum number of jumps a small frog can make from a starting position X to a ending position Y 
