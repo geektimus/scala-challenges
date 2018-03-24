@@ -108,4 +108,11 @@ class CollectionChallengesSpec extends FlatSpec with Matchers {
     val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
     assert(expected == equilibrium)
   }
+
+  "On an array containing [-1000, 1000], the minimum difference" should "be 2000" in {
+    val numbers = Array(-1000, 1000)
+    val expected = 2000
+    val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
+    assert(expected == equilibrium)
+  }
 }
