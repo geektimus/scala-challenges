@@ -38,17 +38,30 @@ object CollectionChallenges {
   }
 
   /**
-   * Finds the minimum difference (Tape Equilibrium) on an array
-   * 
-   * @param ns Number array (Tape)
-   * @return 
-   */
+    * Finds the minimum difference (Tape Equilibrium) on an array
+    *
+    * @param ns Number array (Tape)
+    * @return the minimum difference on an array
+    */
   def findTapeEquilibrium(ns: Array[Int]): Int = {
-    val total = ns.sum
-    val m = for (
-      i <- 1 until ns.length;
-      r <- Some(Math.abs((ns.slice(0, i).sum * 2)  - total))
-    ) yield r
-    m.min
+
+    val absMin: (Int, Int) => Int = (x: Int, y: Int) => {
+      Math.abs(x - y)
+    }
+
+    var start = ns.head
+    var end = ns.tail.sum
+    var min = if (ns.length == 2) absMin(ns.head, ns.tail.head) else 999999999
+
+    for (i <- 1 to ns.length - 2) {
+      val total = absMin(start, end)
+      if (total < min)
+        min = total
+      start = ns(i) + start
+      end = end - ns(i)
+    }
+    min
   }
+
+
 }
