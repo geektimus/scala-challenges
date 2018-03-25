@@ -27,6 +27,10 @@ for [1, 3, 6, 4, 1, 2] the missing integer is [5]
 for [4, 1, 5, 6, 2] the missing integer is [3]
 ```
 
+#### Frog Jumps
+We need to find the minimum number of jumps a small frog can make from a starting position X to a ending position Y 
+given a jump distance D
+
 ### Others (Challenges proposed by Friends or Solved on hackatons)
 #### Recursively reverse a string
 Given a string, reverse the characters and return.
