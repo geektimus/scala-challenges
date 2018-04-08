@@ -51,4 +51,23 @@ object Sorting {
       stitch(mergeSort(s._1), mergeSort(s._2))
     }
   }
+
+  /**
+    * Bubble Sort O(n&#94;2)
+    *
+    * @param ns Array of numbers
+    * @return Array of numbers sorted
+    */
+  def bubbleSort(ns: Array[Int]): Array[Int] = {
+    for (i <- ns.indices) {
+      for (j <- 0 to ns.length - i - 2) {
+        if (ns(j) > ns(j + 1)) {
+          val tmp = ns(j)
+          ns(j) = ns(j + 1)
+          ns(j + 1) = tmp
+        }
+      }
+    }
+    ns
+  }
 }
