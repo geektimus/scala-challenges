@@ -2,7 +2,7 @@ package com.codingmaniacs.algorithms
 
 object Sorting {
   /**
-    * Merge sort
+    * Merge sort O(n log n)
     *
     * @param ns Array of numbers
     * @return Array of numbers sorted
@@ -66,6 +66,31 @@ object Sorting {
           ns(j) = ns(j + 1)
           ns(j + 1) = tmp
         }
+      }
+    }
+    ns
+  }
+
+  /**
+    * Insertion Sort
+    * Two loops means O(n&#94;2)
+    * However since if your list is sorted or nearly so, it can be O(n) in a best case scenario and thus well
+    * adapted to that scenario
+    *
+    * @param ns Array of numbers sorted or nearly sorted
+    * @return Array of numbers sorted
+    */
+  def insertionSort(ns: Array[Int]): Array[Int] = {
+    for (i <- 1 until ns.length) {
+      if (ns(i - 1) > ns(i)) {
+        // Find a place for the value of ns at i - 1
+        var j = i - 1
+        val value = ns(i)
+        while (j >= 0 && value < ns(j)) {
+          ns(j + 1) = ns(j)
+          j -= 1
+        }
+        ns(j + 1) = value
       }
     }
     ns
