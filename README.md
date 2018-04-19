@@ -40,6 +40,24 @@ that can be achieved after we split the array on a pivot P. Such as
 We need to find the minimum number of jumps a small frog can make from a starting position X to a ending position Y 
 given a jump distance D
 
+### Qualified
+
+#### Number and Credit Card Mask
+
+We need to write a function that will allow us to mask any given string. We have only two rules
+
+- The mask wil only be applied to numbers or numbers separated with dashes
+(-)
+- The mask will not be applied to string containing characters or strings which length is less than 6
+- The mask will preserve the first and the last four numbers
+
+For example:
+
+- 8888-9999-9999-0000 -> 8###-####-####-0000
+- 1234567890987654321 -> 1##############4321
+- Credit Card -> Credit Card
+- 123 -> 123
+
 ### Others (Challenges proposed by Friends or Solved on hackatons)
 
 #### Recursively reverse a string

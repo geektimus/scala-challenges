@@ -7,7 +7,8 @@ version := "1.0.0-SNAPSHOT"
 scalaVersion := "2.12.4"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.4"
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.4" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.4" % Test
+libraryDependencies += "org.specs2" %% "specs2-core" % "4.0.3" % Test
 
 logBuffered in Test := false
 
