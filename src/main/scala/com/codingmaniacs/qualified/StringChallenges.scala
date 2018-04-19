@@ -1,5 +1,7 @@
 package com.codingmaniacs.qualified
 
+import scala.collection.mutable
+
 object StringChallenges {
   /**
     * Mask all but the first and the last four characters of a number
@@ -31,6 +33,38 @@ object StringChallenges {
   def isValid(str: String): Boolean = {
     val pattern = "[0-9\\-]".r
     str.length > 5 && pattern.findFirstMatchIn(str).isDefined
+  }
+
+  /**
+    * Evaluates a mathematical expression given on infix notation (n m operation)
+    *
+    * @param expr Mathematical expression
+    * @return The result of the evaluation of the math expresion
+    */
+  def evaluate(expr: String): Double = {
+    if (expr.trim.isEmpty)
+      return 0
+
+    val expArr = expr.split(" ")
+    val stack = mutable.Stack[Double]()
+    for (el <- expArr) {
+      if (el.matches("\\d+(.\\d+)?")) {
+        //number
+        stack.push(el.toDouble)
+      } else {
+        // operation
+        val r = stack.pop()
+        val l = stack.pop()
+        val total = el match {
+          case "+" => l + r
+          case "-" => l - r
+          case "*" => l * r
+          case "/" => l / r
+        }
+        stack.push(total)
+      }
+    }
+    stack.pop()
   }
 
 }

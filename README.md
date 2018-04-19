@@ -68,6 +68,16 @@ Most ordinal numbers end in "th" except for:
 * two ⇒ second (2nd)
 * three ⇒ third (3rd)
 
+#### Infix Calculator
+We need to write a function that given an expression on infix notation will return the result of the operations.
+
+Infix notation is a notation when the numbers are provided first and the operation next.
+
+For example: 
+
+- 3 4 + = 3 + 4 = 7
+- 3 2 1 - * = (2 - 1) * 3 = 3
+
 ### Others (Challenges proposed by Friends or Solved on hackatons)
 
 #### Recursively reverse a string
