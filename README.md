@@ -58,6 +58,16 @@ For example:
 - Credit Card -> Credit Card
 - 123 -> 123
 
+#### Ordinal number representation
+
+We need to write a function that given a non negative number it returns the ordinal representation of that number.
+
+Most ordinal numbers end in "th" except for:
+
+* one ⇒ first (1st)
+* two ⇒ second (2nd)
+* three ⇒ third (3rd)
+
 ### Others (Challenges proposed by Friends or Solved on hackatons)
 
 #### Recursively reverse a string
