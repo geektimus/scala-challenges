@@ -72,7 +72,7 @@ class StringChallengesSpec extends Specification {
       val res = StringChallenges.evaluate("2 3 *")
       res mustEqual 6
     }
-    "evaluate substract two numbers" in {
+    "evaluate subtract two numbers" in {
       val res = StringChallenges.evaluate("2 5 -")
       res mustEqual -3
     }
@@ -95,6 +95,10 @@ class StringChallengesSpec extends Specification {
     "evaluate complex operations mixed 2" in {
       val res = StringChallenges.evaluate("7 4 5 + * 3 - 10 /")
       res mustEqual 6
+    }
+    "evaluate sqrt (simple expression)" in {
+      val res = StringChallenges.evaluate("25 sqrt")
+      res mustEqual 5
     }
   }
 }

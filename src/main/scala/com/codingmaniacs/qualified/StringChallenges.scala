@@ -53,13 +53,34 @@ object StringChallenges {
         stack.push(el.toDouble)
       } else {
         // operation
-        val r = stack.pop()
-        val l = stack.pop()
+
         val total = el match {
-          case "+" => l + r
-          case "-" => l - r
-          case "*" => l * r
-          case "/" => l / r
+          case "+" =>
+            val r = stack.pop()
+            val l = stack.pop()
+            l + r
+
+          case "-" =>
+            val r = stack.pop()
+            val l = stack.pop()
+            l - r
+
+          case "*" =>
+            val r = stack.pop()
+            val l = stack.pop()
+            l * r
+
+          case "/" =>
+            val r = stack.pop()
+            val l = stack.pop()
+            l / r
+
+          case "sqrt" =>
+            val l = stack.pop()
+            Math.sqrt(l)
+
+          case _ => println("Error: Unknown operation $el")
+            0
         }
         stack.push(total)
       }

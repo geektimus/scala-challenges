@@ -77,6 +77,7 @@ For example:
 
 - 3 4 + = 3 + 4 = 7
 - 3 2 1 - * = (2 - 1) * 3 = 3
+- 9 sqrt = sqrt 9 = 3
 
 ### Others (Challenges proposed by Friends or Solved on hackatons)
 
