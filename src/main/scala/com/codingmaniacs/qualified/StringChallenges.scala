@@ -11,7 +11,7 @@ object StringChallenges {
     * @param ccNumber The number
     * @return The masked number if ccNumber is not a string.
     */
-  def maskify(ccNumber: String): String = {
+  def maskNumber(ccNumber: String): String = {
     val ccLen = ccNumber.length
 
     if (!isValid(ccNumber))
@@ -39,7 +39,7 @@ object StringChallenges {
     * Evaluates a mathematical expression given on infix notation (n m operation)
     *
     * @param expr Mathematical expression
-    * @return The result of the evaluation of the math expresion
+    * @return The result of the evaluation of the math expression
     */
   def evaluate(expr: String): Double = {
     if (expr.trim.isEmpty)
