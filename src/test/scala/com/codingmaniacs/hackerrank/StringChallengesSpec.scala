@@ -1,40 +1,44 @@
 package com.codingmaniacs.hackerrank
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.specs2.mutable.Specification
 
-class StringChallengesSpec  extends FlatSpec with Matchers {
-  "The reduction of an empty string" should "be the label 'Empty String'" in {
-    val s = ""
-    val expected = "Empty String"
-    val result = StringChallenges.reduceByPairs(s)
-    assert(result == expected)
+class StringChallengesSpec extends Specification {
+
+  "The reduce by pairs function" should {
+    "reduce an empty string" in {
+      val s = ""
+      val expected = "Empty String"
+      val result = StringChallenges.reduceByPairs(s)
+      result mustEqual expected
+    }
+
+    "reduce an string with a pair of the same letter" in {
+      val s = "aa"
+      val expected = "Empty String"
+      val result = StringChallenges.reduceByPairs(s)
+      result mustEqual expected
+    }
+
+    "reduce aaabccddd to abd" in {
+      val s = "aaabccddd"
+      val expected = "abd"
+      val result = StringChallenges.reduceByPairs(s)
+      result mustEqual expected
+    }
+
+    "reduce baab to 'Empty String'" in {
+      val s = "baab"
+      val expected = "Empty String"
+      val result = StringChallenges.reduceByPairs(s)
+      result mustEqual expected
+    }
+
+    "reduce aaabccbdeed to a" in {
+      val s = "aaabccbdeed"
+      val expected = "a"
+      val result = StringChallenges.reduceByPairs(s)
+      result mustEqual expected
+    }
   }
 
-  "The reduction of a string with a pair of the same letter" should "be the label 'Empty String'" in {
-    val s = "aa"
-    val expected = "Empty String"
-    val result = StringChallenges.reduceByPairs(s)
-    assert(result == expected)
-  }
-
-  "The reduction of aaabccddd" should "be abd" in {
-    val s = "aaabccddd"
-    val expected = "abd"
-    val result = StringChallenges.reduceByPairs(s)
-    assert(result == expected)
-  }
-
-  "The reduction of baab" should "be the label 'Empty String'" in {
-    val s = "baab"
-    val expected = "Empty String"
-    val result = StringChallenges.reduceByPairs(s)
-    assert(result == expected)
-  }
-
-  "The reduction of aaabccbdeed" should "be a" in {
-    val s = "aaabccbdeed"
-    val expected = "a"
-    val result = StringChallenges.reduceByPairs(s)
-    assert(result == expected)
-  }
 }

@@ -1,40 +1,42 @@
 package com.codingmaniacs.others
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.specs2.mutable.Specification
 
-class StringChallengesSpec extends FlatSpec with Matchers {
-  "The reverse of an empty string" should "be empty" in {
-    val s = ""
-    val expected = ""
-    val reverse = StringChallenges.flip(s)
-    assert(reverse == expected)
-  }
+class StringChallengesSpec extends Specification {
+  "The string reverser" should {
+    "handle an empty string" in {
+      val s = ""
+      val expected = ""
+      val reverse = StringChallenges.flip(s)
+      reverse mustEqual expected
+    }
 
-  "The reverse of a string with one char" should "be the same char" in {
-    val s = "a"
-    val expected = "a"
-    val reverse = StringChallenges.flip(s)
-    assert(reverse == expected)
-  }
+    "handle an string of length one" in {
+      val s = "a"
+      val expected = "a"
+      val reverse = StringChallenges.flip(s)
+      reverse mustEqual expected
+    }
 
-  "The reverse of 'ab'" should "be 'ba'" in {
-    val s = "ab"
-    val expected = "ba"
-    val reverse = StringChallenges.flip(s)
-    assert(reverse == expected)
-  }
+    "handle an string of length two" in {
+      val s = "ab"
+      val expected = "ba"
+      val reverse = StringChallenges.flip(s)
+      reverse mustEqual expected
+    }
 
-  "The reverse of 'aaa'" should "be 'aaa'" in {
-    val s = "aaa"
-    val expected = "aaa"
-    val reverse = StringChallenges.flip(s)
-    assert(reverse == expected)
-  }
+    "handle an string with duplicated characters" in {
+      val s = "aaa"
+      val expected = "aaa"
+      val reverse = StringChallenges.flip(s)
+      reverse mustEqual expected
+    }
 
-  "The reverse of 'longer and complex words'" should " be 'sdrow xelpmoc dna regnol'" in {
-    val s = "longer and complex words"
-    val expected = "sdrow xelpmoc dna regnol"
-    val reverse = StringChallenges.flip(s)
-    assert(reverse == expected)
+    "handle 'longer and complex words'" in {
+      val s = "longer and complex words"
+      val expected = "sdrow xelpmoc dna regnol"
+      val reverse = StringChallenges.flip(s)
+      reverse mustEqual expected
+    }
   }
 }
