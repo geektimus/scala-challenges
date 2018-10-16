@@ -8,23 +8,23 @@ object CollectionChallenges {
     * @return Missing Integer
     */
   def findMissingInt(data: Array[Int]): Int = {
-    if (data == null || data.length == 0)
-      return 1
+    data match {
+      case _ if data == null || data.length == 0 => 1
+      case d => val arr = d.filter(n => n > 0).distinct.sorted
 
-    val arr = data.filter(n => n > 0).distinct.sorted
+        if (arr.isEmpty || arr(0) > 1)
+          return 1
 
-    if (arr.isEmpty || arr(0) > 1)
-      return 1
+        val res = arr
+          .zipWithIndex
+          .map(el => (el._1, el._2 + 1))
+          .dropWhile(el => el._1 - el._2 == 0)
 
-    val res = arr
-      .zipWithIndex
-      .map(el => (el._1, el._2 + 1))
-      .dropWhile(el => el._1 - el._2 == 0)
-
-    if (res.isEmpty)
-      arr.last + 1
-    else
-      res.head._2
+        if (res.isEmpty)
+          arr.last + 1
+        else
+          res.head._2
+    }
   }
 
   /**
