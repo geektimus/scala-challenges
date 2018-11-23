@@ -1,6 +1,6 @@
 package com.codingmaniacs.qualified
 
-import scala.collection.mutable
+import scala.annotation.tailrec
 
 object StringChallenges {
   /**
@@ -12,27 +12,17 @@ object StringChallenges {
     * @return The masked number if ccNumber is not a string.
     */
   def maskNumber(ccNumber: String): String = {
-    val ccLen = ccNumber.length
 
-    if (!isValid(ccNumber))
-      return ccNumber
+    ccNumber match {
+      case nonNumber if !isValid(nonNumber) => nonNumber
+      case number =>
+        val ccLen = number.length
 
-    val initial = ccNumber.substring(0, 1)
-    val tail = ccNumber.substring(ccLen - 4)
-    val middle = ccNumber.substring(1, ccLen - 4).replaceAll("[0-9]", "#")
-    initial + middle + tail
-  }
-
-  /**
-    * Allow us to define if the given string follows the rules required to consider
-    * this string as a valid number, i.e, this string should not contain letters or symbols other than dashes
-    *
-    * @param str Any string to be validated
-    * @return true if this is a valid string, false otherwise.
-    */
-  def isValid(str: String): Boolean = {
-    val pattern = "[0-9\\-]".r
-    str.length > 5 && pattern.findFirstMatchIn(str).isDefined
+        val initial = number.substring(0, 1)
+        val tail = number.substring(ccLen - 4)
+        val middle = number.substring(1, ccLen - 4).replaceAll("[0-9]", "#")
+        initial + middle + tail
+    }
   }
 
   /**
@@ -42,51 +32,52 @@ object StringChallenges {
     * @return The result of the evaluation of the math expression
     */
   def evaluate(expr: String): Double = {
-    expr match {
-      case empty if empty == null || empty.trim.isEmpty => 0.0
-      case value =>
-        val expArr = value.split(" ")
-        val stack = mutable.Stack[Double]()
-        for (el <- expArr) {
-          if (el.matches("\\d+(.\\d+)?")) {
-            //number
-            stack.push(el.toDouble)
-          } else {
-            // operation
 
-            val total = el match {
-              case "+" =>
-                val r = stack.pop()
-                val l = stack.pop()
-                l + r
-
-              case "-" =>
-                val r = stack.pop()
-                val l = stack.pop()
-                l - r
-
-              case "*" =>
-                val r = stack.pop()
-                val l = stack.pop()
-                l * r
-
-              case "/" =>
-                val r = stack.pop()
-                val l = stack.pop()
-                l / r
-
-              case "sqrt" =>
-                val l = stack.pop()
-                Math.sqrt(l)
-
-              case _ => println("Error: Unknown operation $el")
-                0
-            }
-            stack.push(total)
-          }
+    @tailrec
+    def eval(values: List[Double], nextChunk: List[String]): Double = (values, nextChunk) match {
+      case (Nil, Nil) => 0.0
+      case (v, Nil) => v.head
+      case (v, n) if isNumber(n.headOption) => eval(n.head.toDouble :: v, n.tail)
+      case (v, op) if !isNumber(op.headOption) =>
+        val n = v.headOption.getOrElse(0.0)
+        op.head match {
+          case "+" => eval(v.tail.headOption.getOrElse(0.0) + n :: v.tail.tail, op.tail)
+          case "-" => eval(v.tail.headOption.getOrElse(0.0) - n :: v.tail.tail, op.tail)
+          case "*" => eval(v.tail.headOption.getOrElse(0.0) * n :: v.tail.tail, op.tail)
+          case "/" => eval(v.tail.headOption.getOrElse(0.0) / n :: v.tail.tail, op.tail)
+          case "sqrt" => eval(Math.sqrt(n) :: v.tail, op.tail)
+          case _ => 0.0
         }
-        stack.pop()
+
     }
+
+    eval(List.empty[Double], expr.split(" ").toList)
   }
 
+  /**
+    * Allow us to define if the given string follows the rules required to consider
+    * this string as a valid number, i.e, this string should not contain letters or symbols other than dashes
+    *
+    * @return true if this is a valid string, false otherwise.
+    */
+  val isValid: String => Boolean = (str: String) => {
+    val pattern = "[0-9\\-]".r
+    str.length > 5 && pattern.findFirstMatchIn(str).isDefined
+  }
+
+  /**
+    * Allow us to find if a given string represents a number.
+    *
+    * @return true if the string represents a number, false otherwise.
+    */
+  val isNumber: Option[String] => Boolean = (s: Option[String]) => {
+    val numberRegex = """(\d+\.*\d*)""".r
+    s match {
+      case Some(v) => v match {
+        case numberRegex(_*) => true
+        case _ => false
+      }
+      case None => false
+    }
+  }
 }

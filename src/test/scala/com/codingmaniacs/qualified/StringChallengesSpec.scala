@@ -96,6 +96,10 @@ class StringChallengesSpec extends Specification {
       val res = StringChallenges.evaluate("7 4 5 + * 3 - 10 /")
       res mustEqual 6
     }
+    "evaluate complex operations mixed 3" in {
+      val res = StringChallenges.evaluate("4 4 * 3 3 * + sqrt 5 +")
+      res mustEqual 10
+    }
     "evaluate sqrt (simple expression)" in {
       val res = StringChallenges.evaluate("25 sqrt")
       res mustEqual 5
