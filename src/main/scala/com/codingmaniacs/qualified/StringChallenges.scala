@@ -42,50 +42,51 @@ object StringChallenges {
     * @return The result of the evaluation of the math expression
     */
   def evaluate(expr: String): Double = {
-    if (expr.trim.isEmpty)
-      return 0
+    expr match {
+      case empty if empty == null || empty.trim.isEmpty => 0.0
+      case value =>
+        val expArr = value.split(" ")
+        val stack = mutable.Stack[Double]()
+        for (el <- expArr) {
+          if (el.matches("\\d+(.\\d+)?")) {
+            //number
+            stack.push(el.toDouble)
+          } else {
+            // operation
 
-    val expArr = expr.split(" ")
-    val stack = mutable.Stack[Double]()
-    for (el <- expArr) {
-      if (el.matches("\\d+(.\\d+)?")) {
-        //number
-        stack.push(el.toDouble)
-      } else {
-        // operation
+            val total = el match {
+              case "+" =>
+                val r = stack.pop()
+                val l = stack.pop()
+                l + r
 
-        val total = el match {
-          case "+" =>
-            val r = stack.pop()
-            val l = stack.pop()
-            l + r
+              case "-" =>
+                val r = stack.pop()
+                val l = stack.pop()
+                l - r
 
-          case "-" =>
-            val r = stack.pop()
-            val l = stack.pop()
-            l - r
+              case "*" =>
+                val r = stack.pop()
+                val l = stack.pop()
+                l * r
 
-          case "*" =>
-            val r = stack.pop()
-            val l = stack.pop()
-            l * r
+              case "/" =>
+                val r = stack.pop()
+                val l = stack.pop()
+                l / r
 
-          case "/" =>
-            val r = stack.pop()
-            val l = stack.pop()
-            l / r
+              case "sqrt" =>
+                val l = stack.pop()
+                Math.sqrt(l)
 
-          case "sqrt" =>
-            val l = stack.pop()
-            Math.sqrt(l)
-
-          case _ => println("Error: Unknown operation $el")
-            0
+              case _ => println("Error: Unknown operation $el")
+                0
+            }
+            stack.push(total)
+          }
         }
-        stack.push(total)
-      }
+        stack.pop()
     }
-    stack.pop()
   }
 
 }
