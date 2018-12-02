@@ -36,11 +36,11 @@ object StringChallenges {
     @tailrec
     def eval(values: List[Double], nextChunk: List[String]): Double = (values, nextChunk) match {
       case (Nil, Nil) => 0.0
-      case (v, Nil) => v.head
-      case (v, n) if isNumber(n.headOption) => eval(n.head.toDouble :: v, n.tail)
+      case (v, Nil) => v.headOption.getOrElse(0.0)
+      case (v, n) if isNumber(n.headOption) => eval(n.headOption.getOrElse("0").toDouble :: v, n.tail)
       case (v, op) if !isNumber(op.headOption) =>
         val n = v.headOption.getOrElse(0.0)
-        op.head match {
+        op.headOption.getOrElse("") match {
           case "+" => eval(v.tail.headOption.getOrElse(0.0) + n :: v.tail.tail, op.tail)
           case "-" => eval(v.tail.headOption.getOrElse(0.0) - n :: v.tail.tail, op.tail)
           case "*" => eval(v.tail.headOption.getOrElse(0.0) * n :: v.tail.tail, op.tail)
