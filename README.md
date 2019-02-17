@@ -20,6 +20,17 @@ Write a function to reduce a given string to its shortest length by doing a seri
 operations in which we select a pair of adjacent lowercase letters that match,
 and then we delete them.
 
+#### Gemstone finder
+
+We have a collections of rocks and we represent it's minerals in a string with letters from [a-z] and we need to write a function to find the gemstones in the collection of rocks. A gemstone is a mineral that occurs at least once in each of the rocks.
+
+Example:
+
+```
+for ["abc","abaaa","bcd"] b is a gemstone since it appears in the three rocks
+for ["ab","cd","ef"] there's no gemstone
+```
+
 ### Codility
 
 #### Missing Integer
