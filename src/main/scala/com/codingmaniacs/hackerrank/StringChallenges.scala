@@ -15,4 +15,9 @@ object StringChallenges {
     }
   }
 
+  val findGemstones: Seq[String] => Int = {
+    case Nil => 0
+    case h :: Nil => h.distinct.length
+    case list => list.reduce((a, b) => a intersect b).length
+  }
 }
