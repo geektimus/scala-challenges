@@ -66,29 +66,47 @@ class CollectionChallengesSpec extends Specification {
     "return zero as the size of an empty list" in {
       val numbers = List()
       val expected = 0
-      val nth = CollectionChallenges.length(numbers)
-      nth mustEqual expected
+      val length = CollectionChallenges.length(numbers)
+      length mustEqual expected
     }
 
     "find the number of elements of a list" in {
       val numbers = List(1, 1, 2, 3, 5, 8)
       val expected = 6
-      val nth = CollectionChallenges.length(numbers)
-      nth mustEqual expected
+      val length = CollectionChallenges.length(numbers)
+      length mustEqual expected
     }
 
     "not fail when trying to reverse an empty list" in {
       val numbers = List()
       val expected = List()
-      val nth = CollectionChallenges.reverse(numbers)
-      nth mustEqual expected
+      val reverse = CollectionChallenges.reverse(numbers)
+      reverse mustEqual expected
     }
 
     "reverse the elements of a list" in {
       val numbers = List(1, 1, 2, 3, 5, 8)
       val expected = List(8, 5, 3, 2, 1, 1)
-      val nth = CollectionChallenges.reverse(numbers)
-      nth mustEqual expected
+      val reverse = CollectionChallenges.reverse(numbers)
+      reverse mustEqual expected
+    }
+
+    "show that an empty list is always a palindrome" in {
+      val numbers = List()
+      val isPalindrome = CollectionChallenges.isPalindrome(numbers)
+      isPalindrome must beTrue
+    }
+
+    "find if a list is a palindrome (true)" in {
+      val numbers = List(1, 2, 3, 2, 1)
+      val isPalindrome = CollectionChallenges.isPalindrome(numbers)
+      isPalindrome must beTrue
+    }
+
+    "find if a list is a palindrome (false)" in {
+      val numbers = List(1, 2, 3, 4, 5)
+      val isPalindrome = CollectionChallenges.isPalindrome(numbers)
+      isPalindrome must beFalse
     }
   }
 }
