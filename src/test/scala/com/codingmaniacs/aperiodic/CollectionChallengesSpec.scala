@@ -77,6 +77,20 @@ class CollectionChallengesSpec extends Specification {
       length mustEqual expected
     }
 
+    "return zero as the size of an empty list (folding)" in {
+      val numbers = List()
+      val expected = 0
+      val length = CollectionChallenges.lengthWithFold(numbers)
+      length mustEqual expected
+    }
+
+    "find the number of elements of a list (folding)" in {
+      val numbers = List(1, 1, 2, 3, 5, 8)
+      val expected = 6
+      val length = CollectionChallenges.lengthWithFold(numbers)
+      length mustEqual expected
+    }
+
     "not fail when trying to reverse an empty list" in {
       val numbers = List()
       val expected = List()
@@ -109,7 +123,7 @@ class CollectionChallengesSpec extends Specification {
       isPalindrome must beFalse
     }
 
-    "flatten a empty" in {
+    "flatten a empty list" in {
       val numbers = List()
       val expected = List()
       val flattenList = CollectionChallenges.flatten(numbers)
@@ -129,5 +143,34 @@ class CollectionChallengesSpec extends Specification {
       val flattenList = CollectionChallenges.flatten(numbers)
       flattenList mustEqual expected
     }
+
+    "compress consecutive elements on a singleton list" in {
+      val elements = List('a)
+      val expected = List('a)
+      val compressedList = CollectionChallenges.compress(elements)
+      compressedList mustEqual expected
+    }
+
+    "compress consecutive elements on a list into one" in {
+      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+      val expected = List('a, 'b, 'c, 'a, 'd, 'e)
+      val compressedList = CollectionChallenges.compress(elements)
+      compressedList mustEqual expected
+    }
+
+    "compress consecutive elements on a singleton list (folding)" in {
+      val elements = List('a)
+      val expected = List('a)
+      val compressedList = CollectionChallenges.compressWithFold(elements)
+      compressedList mustEqual expected
+    }
+
+    "compress consecutive elements on a list into one (folding)" in {
+      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+      val expected = List('a, 'b, 'c, 'a, 'd, 'e)
+      val compressedList = CollectionChallenges.compressWithFold(elements)
+      compressedList mustEqual expected
+    }
+
   }
 }
