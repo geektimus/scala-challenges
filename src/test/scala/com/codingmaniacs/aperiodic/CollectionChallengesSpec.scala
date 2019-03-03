@@ -172,5 +172,61 @@ class CollectionChallengesSpec extends Specification {
       compressedList mustEqual expected
     }
 
+    "pack similar consecutive items in a empty list" in {
+      val elements = List()
+      val expected = List()
+      val packedList = CollectionChallenges.pack(elements)
+      packedList mustEqual expected
+    }
+
+    "pack similar consecutive items in a list" in {
+      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+      val expected = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
+      val packedList = CollectionChallenges.pack(elements)
+      packedList mustEqual expected
+    }
+
+    "pack similar consecutive items in a empty list (span)" in {
+      val elements = List()
+      val expected = List()
+      val packedList = CollectionChallenges.packWithSpan(elements)
+      packedList mustEqual expected
+    }
+
+    "pack similar consecutive items in a list (span)" in {
+      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+      val expected = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
+      val packedList = CollectionChallenges.packWithSpan(elements)
+      packedList mustEqual expected
+    }
+
+    "length encoding on a empty list (tailrec)" in {
+      val elements = List()
+      val expected = List()
+      val lengthEncoded = CollectionChallenges.recursiveEncode(elements)
+      lengthEncoded mustEqual expected
+    }
+
+    "length encoding on a list (tailrec)" in {
+      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+      val expected = List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))
+      val lengthEncoded = CollectionChallenges.recursiveEncode(elements)
+      lengthEncoded mustEqual expected
+    }
+
+    "length encoding on a empty list (composition)" in {
+      val elements = List()
+      val expected = List()
+      val lengthEncoded = CollectionChallenges.encodeComposed(elements)
+      lengthEncoded mustEqual expected
+    }
+
+    "length encoding on a list (composition)" in {
+      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+      val expected = List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))
+      val lengthEncoded = CollectionChallenges.encodeComposed(elements)
+      lengthEncoded mustEqual expected
+    }
+
   }
 }

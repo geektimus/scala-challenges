@@ -96,4 +96,56 @@ object CollectionChallenges {
       case (ls, el) => ls ::: List(el)
     }
   }
+
+  def pack[T](elements: List[T]): List[List[T]] = {
+
+    @tailrec
+    def packList(accum: List[List[T]], ls: List[T]): List[List[T]] = {
+      ls match {
+        case Nil => accum
+        case h :: tail if accum.isEmpty || accum.last.head != h => packList(accum ::: List(List(h)), tail)
+        case h :: tail => packList(accum.init ::: List(accum.last ::: List(h)), tail)
+      }
+    }
+
+    packList(List(), elements)
+
+  }
+
+  def packWithSpan[A](elements: List[A]): List[List[A]] = {
+
+    @tailrec
+    def packList(res: List[List[A]], rem: List[A]): List[List[A]] = rem match {
+      case Nil => res
+      case _ =>
+        val (s: List[A], r: List[A]) = rem span {
+          _ == rem.head
+        }
+        packList(res ::: List(s), r)
+    }
+
+    packList(List(), elements)
+  }
+
+  def recursiveEncode[T](elements: List[T]) : List[(Int, T)] = {
+
+    @tailrec
+    def encodeList(res: List[(Int, T)], els: List[List[T]]) : List[(Int, T)] = {
+      els match {
+        case Nil => res
+        case h :: tail => encodeList(res ::: List((h.length, h.head)) , tail)
+      }
+    }
+
+    encodeList(List(), pack(elements))
+  }
+
+  private def composableEncode[T](packedList: List[List[T]]) : List[(Int, T)] = {
+    packedList match {
+      case Nil => Nil
+      case h :: tail => (h.length, h.head) :: composableEncode(tail)
+    }
+  }
+
+  def encodeComposed[T]: List[T] => List[(Int, T)] = pack[T] _ andThen composableEncode[T]
 }
