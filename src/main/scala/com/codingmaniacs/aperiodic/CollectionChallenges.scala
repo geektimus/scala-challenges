@@ -22,7 +22,7 @@ object CollectionChallenges {
 
   def nthElement[T](n: Int, ls: List[T]): Option[T] = {
     (n, ls) match {
-      case (0, h::_) => Some(h)
+      case (0, h :: _) => Some(h)
       case (pos, _ :: tail) => nthElement(pos - 1, tail)
       case _ => None
     }
@@ -50,15 +50,28 @@ object CollectionChallenges {
   def isPalindrome[T](list: List[T]): Boolean = {
 
     @tailrec
-    def _isPalindrome(rs:Boolean, ls: List[T]): Boolean = {
+    def _isPalindrome(rs: Boolean, ls: List[T]): Boolean = {
       ls match {
         case Nil => rs
         case List(_) => rs
         case l => _isPalindrome(rs && (l.head == l.last), l.tail.init)
       }
     }
+
     _isPalindrome(rs = true, list)
 
   }
 
+  def flatten(ls: List[Any]): List[Any] = {
+
+    @tailrec
+    def flat(rs: List[Any], rem: List[Any]): List[Any] = rem match {
+      case Nil => rs
+      case (h: List[_]) :: Nil => flat(rs, h)
+      case (h: List[_]) :: tail => flat(rs ::: h, tail)
+      case h :: tail => flat(rs ::: List(h), tail)
+    }
+
+    flat(List(), ls)
+  }
 }
