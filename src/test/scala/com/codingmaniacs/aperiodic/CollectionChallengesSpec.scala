@@ -108,5 +108,26 @@ class CollectionChallengesSpec extends Specification {
       val isPalindrome = CollectionChallenges.isPalindrome(numbers)
       isPalindrome must beFalse
     }
+
+    "flatten a empty" in {
+      val numbers = List()
+      val expected = List()
+      val flattenList = CollectionChallenges.flatten(numbers)
+      flattenList mustEqual expected
+    }
+
+    "flatten a list of lists of one item" in {
+      val numbers = List(List(1, 1))
+      val expected = List(1, 1)
+      val flattenList = CollectionChallenges.flatten(numbers)
+      flattenList mustEqual expected
+    }
+
+    "flatten a list of lists of several items" in {
+      val numbers = List(List(1, 1), 2, List(3, List(5, 8)))
+      val expected = List(1, 1, 2, 3, 5, 8)
+      val flattenList = CollectionChallenges.flatten(numbers)
+      flattenList mustEqual expected
+    }
   }
 }
