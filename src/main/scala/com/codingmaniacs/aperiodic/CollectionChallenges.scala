@@ -41,7 +41,7 @@ object CollectionChallenges {
     size(0, itemList)
   }
 
-  val length: List[_] => Int = (ls: List[_]) => ls.foldLeft(0)((accum, _) => accum + 1)
+  val lengthWithFold: List[_] => Int = (ls: List[_]) => ls.foldLeft(0)((accum, _) => accum + 1)
 
   def reverse[T](itemList: List[T]): List[T] = {
     itemList.foldLeft(List[T]())((accum, head) => head :: accum)
@@ -73,5 +73,27 @@ object CollectionChallenges {
     }
 
     flat(List(), ls)
+  }
+
+  def compress[T](elements: List[T]): List[T] = {
+
+    @tailrec
+    def reduceList(res: List[T], ls: List[T]): List[T] = {
+      (res, ls) match {
+        case (_, Nil) => res
+        case (_ :+ l, h :: tail) if l == h => reduceList(res, tail)
+        case (_, h :: tail) => reduceList(res ::: List(h), tail)
+      }
+    }
+
+    reduceList(List(), elements)
+  }
+
+  def compressWithFold[T](elements: List[T]): List[T] = {
+    elements.foldLeft(List[T]()) {
+      case (List(), el) => List(el)
+      case (ls, el) if ls.last == el => ls
+      case (ls, el) => ls ::: List(el)
+    }
   }
 }
