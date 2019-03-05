@@ -106,4 +106,26 @@ for "Return" it should return "nruteR"
 
 #### Classical Fizz Buzz solution
 
-Write a program that prints the numbers from 1 to 100. But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz
+Write a program that prints the numbers from 1 to 100. But for multiples 
+of three print “Fizz” instead of the number and for the multiples of five print 
+“Buzz”. For numbers which are multiples of both three and five print “FizzBuzz
+
+## Useful commands
+
+### Enable scala style check on compile
+If you want to enable the scala check as part of the compile task you can add the following lines to the _build.sbt_ file
+
+```
+lazy val compileScalastyle = taskKey[Unit]("compileScalastyle")
+compileScalastyle := scalastyle.in(Compile).toTask("").value
+(compile in Compile) := ((compile in Compile) dependsOn compileScalastyle).value
+```
+I don't add the line myself since this plugin get executed before the compile step, this can cause problems because if the 
+code does not compile, you’ll get the scalastyle errors messages, not the scalac ones. Great though scalastyle is, it can’t 
+match the error messages produced by the compiler
+
+### Run scala style check
+
+```
+sbt scalastyle
+```
