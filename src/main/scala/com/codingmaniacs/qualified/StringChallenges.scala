@@ -1,7 +1,5 @@
 package com.codingmaniacs.qualified
 
-import scala.annotation.tailrec
-
 object StringChallenges {
   /**
     * Mask all but the first and the last four characters of a number
@@ -32,26 +30,47 @@ object StringChallenges {
     * @return The result of the evaluation of the math expression
     */
   def evaluate(expr: String): Double = {
+    sealed trait ExprToken
+    final case class Number(n: Double) extends ExprToken
+    final case class BinOperator(symbol: String, op: (Double, Double) => Double) extends ExprToken
+    final case class MonoOperator(symbol: String, op: Double => Double) extends ExprToken
 
-    @tailrec
-    def eval(values: List[Double], nextChunk: List[String]): Double = (values, nextChunk) match {
-      case (Nil, Nil) => 0.0
-      case (v, Nil) => v.headOption.getOrElse(0.0)
-      case (v, n) if isNumber(n.headOption) => eval(n.headOption.getOrElse("0").toDouble :: v, n.tail)
-      case (v, op) if !isNumber(op.headOption) =>
-        val n = v.headOption.getOrElse(0.0)
-        op.headOption.getOrElse("") match {
-          case "+" => eval(v.tail.headOption.getOrElse(0.0) + n :: v.tail.tail, op.tail)
-          case "-" => eval(v.tail.headOption.getOrElse(0.0) - n :: v.tail.tail, op.tail)
-          case "*" => eval(v.tail.headOption.getOrElse(0.0) * n :: v.tail.tail, op.tail)
-          case "/" => eval(v.tail.headOption.getOrElse(0.0) / n :: v.tail.tail, op.tail)
-          case "sqrt" => eval(Math.sqrt(n) :: v.tail, op.tail)
-          case _ => 0.0
+    object BinOperator {
+      def apply(symbol: String): BinOperator = {
+        symbol match {
+          case "+" => BinOperator("+", (x, y) => x + y)
+          case "*" => BinOperator("*", (x, y) => x * y)
+          case "-" => BinOperator("-", (x, y) => x - y)
+          case "/" => BinOperator("/", (x, y) => x / y)
         }
+      }
     }
 
-    eval(List.empty[Double], expr.split(" ").toList)
+    def parseTokensToExpr(strTokens: List[String]): List[ExprToken] = {
+      strTokens.map {
+        case tk if tk.matches("^[0-9]+(.[0-9]+)?") => Number(tk.toDouble)
+        case tk if tk.equals("sqrt") => MonoOperator("sqrt", n => Math.sqrt(n))
+        case tk => BinOperator(tk)
+      }
+    }
+
+    def foldExpr(tokens: List[ExprToken]): List[ExprToken] = {
+      tokens.foldLeft(List[ExprToken]())((acc, expr) => {
+        (acc, expr) match {
+          case (Nil, n: Number) => List(n)
+          case (init :+ Number(a) :+ Number(b), BinOperator(_, op)) => init ++ List(Number(op.apply(a, b)))
+          case (init :+ Number(a), MonoOperator(_, op)) => init ++ List(Number(op.apply(a)))
+          case (l, e) => l ++ List(e)
+        }
+      })
+    }
+
+    val solution = parseTokensToExpr _ andThen foldExpr
+
+    val Number(result) = solution(expr.split(" ").toList).last
+    result
   }
+
 
   /**
     * Allow us to define if the given string follows the rules required to consider
@@ -62,21 +81,5 @@ object StringChallenges {
   val isValid: String => Boolean = (str: String) => {
     val pattern = "[0-9\\-]".r
     str.length > 5 && pattern.findFirstMatchIn(str).isDefined
-  }
-
-  /**
-    * Allow us to find if a given string represents a number.
-    *
-    * @return true if the string represents a number, false otherwise.
-    */
-  val isNumber: Option[String] => Boolean = (s: Option[String]) => {
-    val numberRegex = """(\d+\.*\d*)""".r
-    s match {
-      case Some(v) => v match {
-        case numberRegex(_*) => true
-        case _ => false
-      }
-      case None => false
-    }
   }
 }
