@@ -48,7 +48,6 @@ object StringChallenges {
           case "sqrt" => eval(Math.sqrt(n) :: v.tail, op.tail)
           case _ => 0.0
         }
-
     }
 
     eval(List.empty[Double], expr.split(" ").toList)

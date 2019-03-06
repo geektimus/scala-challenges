@@ -129,3 +129,12 @@ match the error messages produced by the compiler
 ```
 sbt scalastyle
 ```
+
+### Run Coverage Reports
+
+**Run Coverage and Generate Report**
+
+```
+sbt clean coverage test coverageReport
+```
+
