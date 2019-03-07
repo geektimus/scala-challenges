@@ -7,24 +7,18 @@ object CollectionChallenges {
     * @param data Int Array
     * @return Missing Integer
     */
-  def findMissingInt(data: Array[Int]): Int = {
-    data match {
-      case _ if data == null || data.length == 0 => 1
-      case d =>
-        val arr = d.filter(n => n > 0).distinct.sorted
-        arr match {
-          case empty if empty.isEmpty || arr(0) > 1 => 1
-          case a =>
-            val res = a
-              .zipWithIndex
-              .map(el => (el._1, el._2 + 1))
-              .dropWhile(el => el._1 - el._2 == 0)
-
-            if (res.isEmpty) {
-              arr.last + 1
-            } else {
-              res.head._2
-            }
+  def findMissingInt(data: Seq[Int]): Int = {
+    val sortedSetWithIndex = data.sorted.distinct.zip(1 to data.size)
+    sortedSetWithIndex match {
+      case Nil => 1
+      case List((x, y)) if x == y && x == 1 => 2
+      case _ =>
+        val dropped = sortedSetWithIndex.dropWhile {
+          case (x, y) => x - y == 0
+        }
+        dropped.headOption match {
+          case Some((_, y)) => y
+          case None => sortedSetWithIndex.length + 1
         }
     }
   }
