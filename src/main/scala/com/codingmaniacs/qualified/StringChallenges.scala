@@ -1,6 +1,26 @@
 package com.codingmaniacs.qualified
 
 object StringChallenges {
+
+  sealed trait ExprToken
+
+  final case class Number(n: Double) extends ExprToken
+
+  final case class BinOperator(symbol: String, op: (Double, Double) => Double) extends ExprToken
+
+  final case class MonoOperator(symbol: String, op: Double => Double) extends ExprToken
+
+  object BinOperator {
+    def apply(symbol: String): BinOperator = {
+      symbol match {
+        case "+" => BinOperator("+", (x, y) => x + y)
+        case "*" => BinOperator("*", (x, y) => x * y)
+        case "-" => BinOperator("-", (x, y) => x - y)
+        case "/" => BinOperator("/", (x, y) => x / y)
+      }
+    }
+  }
+
   /**
     * Mask all but the first and the last four characters of a number
     *
@@ -30,45 +50,32 @@ object StringChallenges {
     * @return The result of the evaluation of the math expression
     */
   def evaluate(expr: String): Double = {
-    sealed trait ExprToken
-    final case class Number(n: Double) extends ExprToken
-    final case class BinOperator(symbol: String, op: (Double, Double) => Double) extends ExprToken
-    final case class MonoOperator(symbol: String, op: Double => Double) extends ExprToken
-
-    object BinOperator {
-      def apply(symbol: String): BinOperator = {
-        symbol match {
-          case "+" => BinOperator("+", (x, y) => x + y)
-          case "*" => BinOperator("*", (x, y) => x * y)
-          case "-" => BinOperator("-", (x, y) => x - y)
-          case "/" => BinOperator("/", (x, y) => x / y)
-        }
-      }
-    }
-
-    def parseTokensToExpr(strTokens: List[String]): List[ExprToken] = {
-      strTokens.map {
-        case tk if tk.matches("^[0-9]+(.[0-9]+)?") => Number(tk.toDouble)
-        case tk if tk.equals("sqrt") => MonoOperator("sqrt", n => Math.sqrt(n))
-        case tk => BinOperator(tk)
-      }
-    }
-
-    def foldExpr(tokens: List[ExprToken]): List[ExprToken] = {
-      tokens.foldLeft(List[ExprToken]())((acc, expr) => {
-        (acc, expr) match {
-          case (Nil, n: Number) => List(n)
-          case (init :+ Number(a) :+ Number(b), BinOperator(_, op)) => init ++ List(Number(op.apply(a, b)))
-          case (init :+ Number(a), MonoOperator(_, op)) => init ++ List(Number(op.apply(a)))
-          case (l, e) => l ++ List(e)
-        }
-      })
-    }
-
     val solution = parseTokensToExpr _ andThen foldExpr
+    val result = solution(expr.split(" ").toList).lastOption
+    result match {
+      case Some(Number(n)) => n
+      case Some(_) => 0.0
+      case None => 0.0
+    }
+  }
 
-    val Number(result) = solution(expr.split(" ").toList).last
-    result
+  def parseTokensToExpr(strTokens: List[String]): List[ExprToken] = {
+    strTokens.map {
+      case tk if tk.matches("^[0-9]+(.[0-9]+)?") => Number(tk.toDouble)
+      case tk if tk.equals("sqrt") => MonoOperator("sqrt", n => Math.sqrt(n))
+      case tk => BinOperator(tk)
+    }
+  }
+
+  def foldExpr(tokens: List[ExprToken]): List[ExprToken] = {
+    tokens.foldLeft(List[ExprToken]())((acc, expr) => {
+      (acc, expr) match {
+        case (Nil, n: Number) => List(n)
+        case (init :+ Number(a) :+ Number(b), BinOperator(_, op)) => init ++ List(Number(op.apply(a, b)))
+        case (init :+ Number(a), MonoOperator(_, op)) => init ++ List(Number(op.apply(a)))
+        case (l, e) => l ++ List(e)
+      }
+    })
   }
 
 

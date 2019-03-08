@@ -66,15 +66,15 @@ class StringChallengesSpec extends Specification {
     }
     "evaluate add two numbers" in {
       val res = StringChallenges.evaluate("1 3 +")
-      res mustEqual 4
+      res mustEqual (1 + 3)
     }
     "evaluate multiply two numbers" in {
       val res = StringChallenges.evaluate("2 3 *")
-      res mustEqual 6
+      res mustEqual (2 * 3)
     }
     "evaluate subtract two numbers" in {
       val res = StringChallenges.evaluate("2 5 -")
-      res mustEqual -3
+      res mustEqual (2 - 5)
     }
     "evaluate divide two numbers" in {
       val res = StringChallenges.evaluate("9 2 /")
