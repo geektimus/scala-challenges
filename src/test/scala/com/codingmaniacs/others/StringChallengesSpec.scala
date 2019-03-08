@@ -3,7 +3,7 @@ package com.codingmaniacs.others
 import org.specs2.mutable.Specification
 
 class StringChallengesSpec extends Specification {
-  "The string reverser" should {
+  "The string reverser (using fold)" should {
     "handle an empty string" in {
       val s = ""
       val expected = ""
