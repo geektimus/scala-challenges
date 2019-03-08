@@ -106,7 +106,7 @@ class CollectionChallengesSpec extends Specification {
 
   "To find the tape equilibrium the function" should {
     "return 0 as the equilibrium on the tape [1,1]" in {
-      val numbers = Array(1, 1)
+      val numbers = List(1, 1)
       val expected = 0
       val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
       equilibrium mustEqual expected
@@ -114,7 +114,7 @@ class CollectionChallengesSpec extends Specification {
 
     "return 4 as the equilibrium on the tape [2,6]" in {
       // scalastyle:off magic.number
-      val numbers = Array(2, 6)
+      val numbers = List(2, 6)
       // scalastyle:on magic.number
       val expected = 4
       val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
@@ -123,7 +123,7 @@ class CollectionChallengesSpec extends Specification {
 
     "return 0 as the equilibrium on the tape [55,10,45]" in {
       // scalastyle:off magic.number
-      val numbers = Array(55, 10, 45)
+      val numbers = List(55, 10, 45)
       // scalastyle:on magic.number
       val expected = 0
       val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
@@ -132,7 +132,7 @@ class CollectionChallengesSpec extends Specification {
 
     "return 1 as the equilibrium on the tape [3,1,2,4,3]" in {
       // scalastyle:off magic.number
-      val numbers = Array(3, 1, 2, 4, 3)
+      val numbers = List(3, 1, 2, 4, 3)
       // scalastyle:on magic.number
       val expected = 1
       val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
@@ -141,7 +141,7 @@ class CollectionChallengesSpec extends Specification {
 
     "return 2000 as the equilibrium on the tape [-1000,1000]" in {
       // scalastyle:off magic.number
-      val numbers = Array(-1000, 1000)
+      val numbers = List(-1000, 1000)
       // scalastyle:on magic.number
       val expected = 2000
       val equilibrium = CollectionChallenges.findTapeEquilibrium(numbers)
