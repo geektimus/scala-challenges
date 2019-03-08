@@ -1,23 +1,18 @@
 package com.codingmaniacs.others
 
-import scala.annotation.tailrec
+import scala.util.matching.Regex
 
 object StringChallenges {
+
+  val extractionPattern: Regex = "(.*)([a-zA-Z\\s])$".r
+
   /**
-    * Given a string it returns the reverse of the string
+    * Given a string it returns the reverse of the string using foldRight
     *
     * @param str String
     * @return Reverse representation of the string
     */
   def flip(str: String): String = {
-    @tailrec
-    def reverser(str: String, acc: String): String = {
-      str match {
-        case s if s.length == 0 => acc
-        case x => reverser(x.substring(0, x.length - 1), acc + x.last)
-      }
-    }
-
-    reverser(str, "")
+    str.foldRight("") ((el, acc) => acc + el)
   }
 }
