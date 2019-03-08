@@ -1,5 +1,7 @@
 package com.codingmaniacs.codility
 
+import scala.annotation.tailrec
+
 object CollectionChallenges {
   /**
     * Finds the missing positive integer that can occur on the array
@@ -39,27 +41,22 @@ object CollectionChallenges {
     * @param ns Number array (Tape)
     * @return the minimum difference on an array
     */
-  def findTapeEquilibrium(ns: Array[Int]): Int = {
+  def findTapeEquilibrium(ns: List[Int]): Int = {
 
-    val maxDefaultTapeEq = 999999999
+    val minus = (a: Int, b: Int) => Math.abs(a - b)
 
-    val absMin: (Int, Int) => Int = (x: Int, y: Int) => {
-      Math.abs(x - y)
-    }
-
-    var start = ns.head
-    var end = ns.tail.sum
-    var min = if (ns.length == 2) absMin(ns.head, ns.tail.head) else maxDefaultTapeEq
-
-    for (i <- 1 to ns.length - 2) {
-      val total = absMin(start, end)
-      if (total < min) {
-        min = total
+    @tailrec
+    def findEquilibrium(min: Int, a: List[Int], b: List[Int]): Int = {
+      b match {
+        case List() => min
+        case List(el) => min
+        case h :: tail =>
+          val newMin = Math.min(min, minus((a ::: List(h)).sum, tail.sum))
+          findEquilibrium(newMin, a ::: List(h), tail)
       }
-      start = ns(i) + start
-      end = end - ns(i)
     }
-    min
+
+    findEquilibrium(Int.MaxValue, List(), ns)
   }
 
 
