@@ -9,7 +9,7 @@ object CollectionChallenges {
       (a, s) match {
         case (List(), List()) => List()
         case (ls, List()) => ls
-        case (ina :+ enda, ins :+ ends) if enda == ends => lastIndexSeen(ina, ins)
+        case (ina :+ endA, ins :+ endS) if endA == endS => lastIndexSeen(ina, ins)
         case (ina :+ _, _) => lastIndexSeen(ina, s)
       }
     }
