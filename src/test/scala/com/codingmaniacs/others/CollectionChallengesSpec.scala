@@ -44,5 +44,15 @@ class CollectionChallengesSpec extends Specification {
       val reverse = CollectionChallenges.lastIndexOfSlice(s, slice)
       reverse mustEqual expected
     }
+
+    "find the last index of a big slice on an array" in {
+      // scalastyle:off magic.number
+      val s =  Array(7,2,3,4,6,9,3,4,6,21,8)
+      val slice =  Array(3,4,6,9)
+      // scalastyle:on magic.number
+      val expected = 2
+      val reverse = CollectionChallenges.lastIndexOfSlice(s, slice)
+      reverse mustEqual expected
+    }
   }
 }

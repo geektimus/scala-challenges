@@ -128,6 +128,23 @@ of three print “Fizz” instead of the number and for the multiples of five pr
 This is a basic problem where we need to find if a number is present on the
 given array.
 
+#### Basic word count problem but without using REGEX expressions.
+
+Write a function which returns the number of words in a given string - without using REGEX expressions
+
+```
+given "disco1 hero2" or
+      "  disco1  hero2" or
+      "disco1  hero2  " or
+      "  disco1  hero2  "
+then the word count should be 2, the solution should ignore the spaces.
+```
+
+#### Find the last index of a slice on a given array
+
+Write a function which prints the index of the last occurrence of the entire sequence within a given array 
+WITHOUT using inbuilt **sliding**, **lastIndexOf** and **lastIndexOfSlice** functions.
+
 ## Useful commands
 
 ### Enable scala style check on compile
