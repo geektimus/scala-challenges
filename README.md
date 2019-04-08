@@ -110,6 +110,11 @@ Write a program that prints the numbers from 1 to 100. But for multiples
 of three print “Fizz” instead of the number and for the multiples of five print 
 “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz
 
+#### Find number in Array
+
+This is a basic problem where we need to find if a number is present on the
+given array.
+
 ## Useful commands
 
 ### Enable scala style check on compile

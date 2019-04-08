@@ -1,12 +1,16 @@
 package com.codingmaniacs.hackerrank
 
+import scala.annotation.tailrec
+
 object CollectionChallenges {
+
   def findNumber(arr: Array[Int], k: Int): String = {
+
+    @tailrec
     def findK(ls: List[Int], n: Int) : String = {
       ls match {
         case Nil => "NO"
-        case h :: Nil if h == k => "YES"
-        case h :: _ if h == k => "YES"
+        case h :: _ if h == n => "YES"
         case _ :: tail => findK(tail, n)
       }
     }
