@@ -91,6 +91,19 @@ For example:
 - 3 2 1 - * = (2 - 1) * 3 = 3
 - 9 sqrt = sqrt 9 = 3
 
+### Aperiodic (Scala Specific Challenges)
+
+1. P01 (*) Find the last element of a list.
+1. P02 (*) Find the last but one element of a list.
+1. P03 (*) Find the Kth element of a list.
+1. P04 (*) Find the number of elements of a list.
+1. P05 (*) Reverse a list.
+1. P06 (*) Find out whether a list is a palindrome.
+1. P07 (**) Flatten a nested list structure.
+1. P08 (**) Eliminate consecutive duplicates of list elements.
+1. P09 (**) Pack consecutive duplicates of list elements into sublists.
+1. P10 (*) Run-length encoding of a list.
+
 ### Others (Challenges proposed by Friends or Solved on hackatons)
 
 #### Recursively reverse a string
