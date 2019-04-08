@@ -12,8 +12,10 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "find the last element of a list." in {
+      // scalastyle:off magic.number
       val numbers = List(1, 2, 3, 4)
       val expected = Some(4)
+      // scalastyle:on magic.number
       val last = CollectionChallenges.lastElement(numbers)
       last mustEqual expected
     }
@@ -172,31 +174,17 @@ class CollectionChallengesSpec extends Specification {
       compressedList mustEqual expected
     }
 
-    "pack similar consecutive items in a empty list" in {
-      val elements = List()
-      val expected = List()
-      val packedList = CollectionChallenges.pack(elements)
-      packedList mustEqual expected
-    }
-
-    "pack similar consecutive items in a list" in {
-      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
-      val expected = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
-      val packedList = CollectionChallenges.pack(elements)
-      packedList mustEqual expected
-    }
-
     "pack similar consecutive items in a empty list (span)" in {
       val elements = List()
       val expected = List()
-      val packedList = CollectionChallenges.packWithSpan(elements)
+      val packedList = CollectionChallenges.pack(elements)
       packedList mustEqual expected
     }
 
     "pack similar consecutive items in a list (span)" in {
       val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
       val expected = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
-      val packedList = CollectionChallenges.packWithSpan(elements)
+      val packedList = CollectionChallenges.pack(elements)
       packedList mustEqual expected
     }
 

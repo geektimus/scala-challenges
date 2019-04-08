@@ -50,15 +50,15 @@ object CollectionChallenges {
   def isPalindrome[T](list: List[T]): Boolean = {
 
     @tailrec
-    def _isPalindrome(rs: Boolean, ls: List[T]): Boolean = {
+    def isPalindromeRec(rs: Boolean, ls: List[T]): Boolean = {
       ls match {
         case Nil => rs
         case List(_) => rs
-        case l => _isPalindrome(rs && (l.head == l.last), l.tail.init)
+        case l => isPalindromeRec(rs && (l.head == l.last), l.tail.init)
       }
     }
 
-    _isPalindrome(rs = true, list)
+    isPalindromeRec(rs = true, list)
 
   }
 
@@ -97,22 +97,7 @@ object CollectionChallenges {
     }
   }
 
-  def pack[T](elements: List[T]): List[List[T]] = {
-
-    @tailrec
-    def packList(accum: List[List[T]], ls: List[T]): List[List[T]] = {
-      ls match {
-        case Nil => accum
-        case h :: tail if accum.isEmpty || accum.last.head != h => packList(accum ::: List(List(h)), tail)
-        case h :: tail => packList(accum.init ::: List(accum.last ::: List(h)), tail)
-      }
-    }
-
-    packList(List(), elements)
-
-  }
-
-  def packWithSpan[A](elements: List[A]): List[List[A]] = {
+  def pack[A](elements: List[A]): List[List[A]] = {
 
     @tailrec
     def packList(res: List[List[A]], rem: List[A]): List[List[A]] = rem match {
