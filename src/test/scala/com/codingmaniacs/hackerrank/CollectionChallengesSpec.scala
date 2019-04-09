@@ -36,4 +36,38 @@ class CollectionChallengesSpec extends Specification {
       oddNumbers mustEqual expected
     }
   }
+
+  "The stair case generator" should {
+    "print a right-aligned staircase of size 1" in {
+      val size = 1
+      val expected = List(List("#"))
+      val staircase = CollectionChallenges.generateStaircase(size)
+      staircase mustEqual expected
+    }
+
+    "print a right-aligned staircase of size 3" in {
+      val size = 3
+      val expected = List(
+        List("  #"),
+        List(" ##"),
+        List("###")
+      )
+      val staircase = CollectionChallenges.generateStaircase(size)
+      staircase mustEqual expected
+    }
+
+    "print a right-aligned staircase of size 6" in {
+      val size = 6
+      val expected = List(
+        List("     #"),
+        List("    ##"),
+        List("   ###"),
+        List("  ####"),
+        List(" #####"),
+        List("######")
+      )
+      val staircase = CollectionChallenges.generateStaircase(size)
+      staircase mustEqual expected
+    }
+  }
 }
