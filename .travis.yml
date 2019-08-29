@@ -1,20 +1,28 @@
 language: scala
-scala:
-   - 2.12.8
 
-# blocklist
+scala:
+  - 2.12.9
+
+jdk:
+  - openjdk8
+
+env:
+  global:
+    - secure: GT+mq0yekjrhI0prDAcBqJ3LGjGH+uG7XpTg9t54JgCRQ3D761GxaAbFaVY3Eo7HzL6AjnjpgOaTBRbwz/ePsMVRHzr6vFFeqX0Bslg5iH4xWZ8ncVB9v9Wv9bY5+dPjFhpW480GYVM6UBY8tXre4pcUBdpPZPTjyzfkQB7TRnuzGjtmEFk8BpIkTeJivdJGtln+OI2OzGGcD6E/apSnO/3bNM8qj19Vxy0oGf5QueDIcF9P1U/Im8P+ifwzwZtBgTfnZXMGj/7g8v1vMvqzfLv0fxIJfKSq7b6S+MGBFMglr+X0hiC2BWIgXMyPPY1gji2Prc+wPzQ92VZwgQX8U2mrz3Y1Fe0TXACjHwqLJj3VXVG8Q3Yan/3rumxYJ2XG84CZRCnKdkAq65oROJfr/Mf/XvrBKBvqoRjop+tPJhIfwifeBV3kTd8cD4JAL2gbuzUW0zyyLs8/WrUtSZHq3v9JTJ2Is6ItbtkQROhYDDLR+UjfUHDCWBBOLOY40qr+8wZAIQAZFlfy+h/183MyT+PNS2szIo9qQVakt6BlvrDLup5LRrEL/aNu6W8sy6PtOYeMgZ6rHgR2g4OU98xsLaKnUexpRybaWGijK6juRYhYmFNcfHYL8xFdEZo+Kk2+2dVqajNELWKTqQG24OsRH3FjAwfPbccr7k1QopGHpWA=
+
 branches:
   except:
-  - /^feature.*$/
-
-# safelist
-branches:
+    - "/^feature.*$/"
   only:
-  - master
+    - master
 
-before_build:
+before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-after_build:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - "./cc-test-reporter before-build"
+
+script:
+  - sbt clean coverage test coverageReport
+
+after_script:
+  - "./cc-test-reporter after-build --coverage-input-type cobertura --exit-code $TRAVIS_TEST_RESULT"
