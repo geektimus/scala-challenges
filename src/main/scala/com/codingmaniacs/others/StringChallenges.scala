@@ -36,26 +36,18 @@ object StringChallenges {
     * @param str String
     * @return Number of words found on the string using recursion
     */
-  def wordCountWithRec(str: String): Int = {
-    str match {
-      case "" => 0
-      case _ =>
-        val trimmed = str.trim
-        val sequence = trimmed.toList
-        wordCountRec(sequence, 0)
+  def wordCountWithRec(str: String) : Int = {
+    @tailrec
+    def reduce(res: Int, currentChar: Option[Char], remaining: List[Char]) : Int = {
+      (remaining, currentChar) match {
+        case (Nil, _) => res
+        case (h :: t, None) => reduce(res + 1, Some(h), t)
+        case (h :: t, Some(c)) if c == 32 && h != 32 => reduce(res + 1, Some(h), t)
+        case (h :: t, _) => reduce(res, Some(h), t)
+      }
     }
-  }
 
-  @tailrec
-  def wordCountRec(charSeq: List[Char], spaces: Int): Int = {
-    charSeq match {
-      case Nil => spaces + 1
-      case h :: th :: tail if h == 32 && th == 32 =>
-        wordCountRec(th :: tail, spaces)
-      case h :: th :: tail if h == 32 && th != 32 =>
-        wordCountRec(tail, spaces + 1)
-      case _ :: tail =>
-        wordCountRec(tail, spaces)
-    }
+    val characters = str.trim.toList
+    reduce(0, None, characters)
   }
 }

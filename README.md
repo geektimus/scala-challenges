@@ -2,6 +2,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5120a93f50d44aebb6c291072ad363aa)](https://app.codacy.com/app/geektimus/scala-challenges?utm_source=github.com&utm_medium=referral&utm_content=geektimus/scala-challenges&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/geektimus/scala-challenges.svg?branch=master)](https://travis-ci.org/geektimus/scala-challenges)
+[![Maintainability](https://api.codeclimate.com/v1/badges/640e9a8ef7fc7f757aaf/maintainability)](https://codeclimate.com/github/geektimus/scala-challenges/maintainability)
 
 This repo will contain the solutions using Scala for challenges found on:
 
