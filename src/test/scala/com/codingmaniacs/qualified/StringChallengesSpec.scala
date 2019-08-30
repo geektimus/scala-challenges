@@ -52,6 +52,10 @@ class StringChallengesSpec extends Specification {
     }
   }
   "The expression evaluator" should {
+    "evaluate a empty expresion" in {
+      val res = StringChallenges.evaluate("")
+      res mustEqual 0.0
+    }
     "evaluate a simple number" in {
       val res = StringChallenges.evaluate("3")
       res mustEqual 3

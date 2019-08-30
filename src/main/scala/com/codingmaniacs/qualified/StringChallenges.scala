@@ -4,6 +4,8 @@ object StringChallenges {
 
   sealed trait ExprToken
 
+  final case object EmptyToken extends ExprToken
+
   final case class Number(n: Double) extends ExprToken
 
   final case class BinOperator(symbol: String, op: (Double, Double) => Double) extends ExprToken
@@ -54,7 +56,7 @@ object StringChallenges {
     val result = solution(expr.split(" ").toList).lastOption
     result match {
       case Some(Number(n)) => n
-      case None => 0.0
+      case Some(EmptyToken) => 0.0
     }
   }
 
@@ -62,6 +64,7 @@ object StringChallenges {
     strTokens.map {
       case tk if tk.matches("^[0-9]+(.[0-9]+)?") => Number(tk.toDouble)
       case tk if tk.equals("sqrt") => MonoOperator("sqrt", n => Math.sqrt(n))
+      case tk if tk.equals("") => EmptyToken
       case tk => BinOperator(tk)
     }
   }
