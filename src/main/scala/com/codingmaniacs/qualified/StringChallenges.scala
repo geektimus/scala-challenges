@@ -54,7 +54,6 @@ object StringChallenges {
     val result = solution(expr.split(" ").toList).lastOption
     result match {
       case Some(Number(n)) => n
-      case Some(_) => 0.0
       case None => 0.0
     }
   }

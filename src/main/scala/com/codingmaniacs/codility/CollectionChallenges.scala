@@ -13,7 +13,7 @@ object CollectionChallenges {
     val sortedSetWithIndex = data.sorted.distinct.zip(1 to data.size)
     sortedSetWithIndex match {
       case Nil => 1
-      case List((x, y)) if x == y && x == 1 => 2
+      case Seq((x, y)) if x == y && x == 1 => 2
       case _ =>
         val dropped = sortedSetWithIndex.dropWhile {
           case (x, y) => x - y == 0
