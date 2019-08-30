@@ -14,6 +14,7 @@ libraryDependencies += "org.specs2" %% "specs2-core" % "4.4.1" % Test
 
 logBuffered in Test := false
 
+coverageEnabled := true
 coverageMinimum := 90
 coverageFailOnMinimum := true
 coverageHighlighting := true

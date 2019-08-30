@@ -4,6 +4,7 @@ import scala.annotation.tailrec
 
 object CollectionChallenges {
 
+  @tailrec
   def lastElement[T](itemList: List[T]): Option[T] = {
     itemList match {
       case Nil => None
@@ -12,6 +13,7 @@ object CollectionChallenges {
     }
   }
 
+  @tailrec
   def penultimate[T](itemList: List[T]): Option[T] = {
     itemList match {
       case Nil => None
@@ -20,6 +22,7 @@ object CollectionChallenges {
     }
   }
 
+  @tailrec
   def nthElement[T](n: Int, ls: List[T]): Option[T] = {
     (n, ls) match {
       case (0, h :: _) => Some(h)
@@ -51,10 +54,10 @@ object CollectionChallenges {
 
     @tailrec
     def isPalindromeRec(rs: Boolean, ls: List[T]): Boolean = {
-      ls match {
-        case Nil => rs
-        case List(_) => rs
-        case l => isPalindromeRec(rs && (l.head == l.last), l.tail.init)
+      (ls, ls) match {
+        case (Nil, Nil) => rs
+        case (List(_), List(_)) => rs
+        case (h :: tail, _ :+ last) => isPalindromeRec(rs && (h == last), tail.dropRight(1))
       }
     }
 
@@ -92,7 +95,7 @@ object CollectionChallenges {
   def compressWithFold[T](elements: List[T]): List[T] = {
     elements.foldLeft(List[T]()) {
       case (List(), el) => List(el)
-      case (ls, el) if ls.last == el => ls
+      case (ls, el) if ls.lastOption.getOrElse(()) == el => ls
       case (ls, el) => ls ::: List(el)
     }
   }
@@ -104,7 +107,7 @@ object CollectionChallenges {
       case Nil => res
       case _ =>
         val (s: List[A], r: List[A]) = rem span {
-          _ == rem.head
+          _ == rem.headOption.getOrElse(())
         }
         packList(res ::: List(s), r)
     }
@@ -112,20 +115,20 @@ object CollectionChallenges {
     packList(List(), elements)
   }
 
-  def recursiveEncode[T](elements: List[T]) : List[(Int, T)] = {
+  def recursiveEncode[T](elements: List[T]): List[(Int, T)] = {
 
     @tailrec
-    def encodeList(res: List[(Int, T)], els: List[List[T]]) : List[(Int, T)] = {
+    def encodeList(res: List[(Int, T)], els: List[List[T]]): List[(Int, T)] = {
       els match {
         case Nil => res
-        case h :: tail => encodeList(res ::: List((h.length, h.head)) , tail)
+        case h :: tail => encodeList(res ::: List((h.length, h.head)), tail)
       }
     }
 
     encodeList(List(), pack(elements))
   }
 
-  private def composableEncode[T](packedList: List[List[T]]) : List[(Int, T)] = {
+  private def composableEncode[T](packedList: List[List[T]]): List[(Int, T)] = {
     packedList match {
       case Nil => Nil
       case h :: tail => (h.length, h.head) :: composableEncode(tail)
