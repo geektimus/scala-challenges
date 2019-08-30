@@ -122,6 +122,7 @@ object CollectionChallenges {
       els match {
         case Nil => res
         case h :: tail => h match {
+          case Nil => res
           case h1 :: _ => encodeList(res ::: List((h.length, h1)), tail)
         }
       }
@@ -134,6 +135,7 @@ object CollectionChallenges {
     packedList match {
       case Nil => Nil
       case h :: tail => h match {
+        case Nil => Nil
         case h1 :: _ => (h.length, h1) :: composableEncode(tail)
       }
     }
