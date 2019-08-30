@@ -26,4 +26,4 @@ script:
 
 after_script:
   - "./cc-test-reporter format-coverage -t cobertura -d target/scala-2.12/coverage-report/cobertura.xml"
-    "./cc-test-reporter upload-coverage"
+  - "./cc-test-reporter upload-coverage"
