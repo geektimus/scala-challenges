@@ -35,7 +35,9 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "find the last but one element of a list" in {
+      // scalastyle:off magic.number
       val numbers = List(1, 2, 3, 4)
+      // scalastyle:on magic.number
       val expected = Some(3)
       val last = CollectionChallenges.penultimate(numbers)
       last mustEqual expected
@@ -50,7 +52,9 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "find the nth element of a list" in {
+      // scalastyle:off magic.number
       val numbers = List(1, 1, 2, 3, 5, 8)
+      // scalastyle:on magic.number
       val nthPosition = 2
       val expected = Some(2)
       val nth = CollectionChallenges.nthElement(nthPosition, numbers)
@@ -58,7 +62,9 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "return the nth element of a list as None if nth > list size" in {
+      // scalastyle:off magic.number
       val numbers = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
+      // scalastyle:on magic.number
       val nthPosition = 20
       val expected = None
       val nth = CollectionChallenges.nthElement(nthPosition, numbers)
@@ -73,7 +79,9 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "find the number of elements of a list" in {
+      // scalastyle:off magic.number
       val numbers = List(1, 1, 2, 3, 5, 8)
+      // scalastyle:on magic.number
       val expected = 6
       val length = CollectionChallenges.length(numbers)
       length mustEqual expected
@@ -87,7 +95,9 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "find the number of elements of a list (folding)" in {
+      // scalastyle:off magic.number
       val numbers = List(1, 1, 2, 3, 5, 8)
+      // scalastyle:on magic.number
       val expected = 6
       val length = CollectionChallenges.lengthWithFold(numbers)
       length mustEqual expected
@@ -101,8 +111,10 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "reverse the elements of a list" in {
+      // scalastyle:off magic.number
       val numbers = List(1, 1, 2, 3, 5, 8)
       val expected = List(8, 5, 3, 2, 1, 1)
+      // scalastyle:on magic.number
       val reverse = CollectionChallenges.reverse(numbers)
       reverse mustEqual expected
     }
@@ -120,8 +132,10 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "find if a list is a palindrome (false)" in {
+      // scalastyle:off magic.number
       val numbers = List(1, 2, 3, 4, 5)
       val isPalindrome = CollectionChallenges.isPalindrome(numbers)
+      // scalastyle:on magic.number
       isPalindrome must beFalse
     }
 
@@ -140,8 +154,10 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "flatten a list of lists of several items" in {
+      // scalastyle:off magic.number
       val numbers = List(List(1, 1), 2, List(3, List(5, 8)))
       val expected = List(1, 1, 2, 3, 5, 8)
+      // scalastyle:on magic.number
       val flattenList = CollectionChallenges.flatten(numbers)
       flattenList mustEqual expected
     }
