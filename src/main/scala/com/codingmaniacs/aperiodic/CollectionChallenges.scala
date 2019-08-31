@@ -131,7 +131,7 @@ object CollectionChallenges {
     encodeList(List(), pack(elements))
   }
 
-  private def composableEncode[T](packedList: List[List[T]]): List[(Int, T)] = {
+  def composableEncode[T](packedList: List[List[T]]): List[(Int, T)] = {
     packedList match {
       case Nil => Nil
       case h :: tail => h match {

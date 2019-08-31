@@ -232,5 +232,18 @@ class CollectionChallengesSpec extends Specification {
       lengthEncoded mustEqual expected
     }
 
+    "encode an empty list" in {
+      val elements = List(List())
+      val expected = List()
+      val res = CollectionChallenges.composableEncode(elements)
+      res mustEqual expected
+    }
+
+    "count the occurrences and group the elements on a list" in {
+      val elements = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
+      val expected = List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))
+      val res = CollectionChallenges.composableEncode(elements)
+      res mustEqual expected
+    }
   }
 }
