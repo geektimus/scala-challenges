@@ -1,6 +1,7 @@
 package com.codingmaniacs.hackerrank
 
 object StringChallenges {
+
   def reduceByPairs(s: String): String = {
     var r = s
     val re = "(\\w)\\1{1}".r

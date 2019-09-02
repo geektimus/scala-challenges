@@ -1,6 +1,7 @@
 package com.codingmaniacs.codility
 
 object NumericChallenges {
+
   /**
     * Finds the binary gap of the given number
     * Binary gap is the max number of consecutive zeros between ones on the binary representation of the number.
@@ -22,7 +23,6 @@ object NumericChallenges {
     * @param d Maximum distance that the frog can jump
     * @return The minimal number of jumps from position X to a position equal to or greater than Y
     */
-  def frogJumps(x: Int, y: Int, d: Int): Int = {
+  def frogJumps(x: Int, y: Int, d: Int): Int =
     Math.ceil(Math.abs(x - y).toDouble / d.toDouble).toInt
-  }
 }

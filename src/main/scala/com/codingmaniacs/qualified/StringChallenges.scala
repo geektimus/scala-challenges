@@ -13,14 +13,14 @@ object StringChallenges {
   final case class MonoOperator(symbol: String, op: Double => Double) extends ExprToken
 
   object BinOperator {
-    def apply(symbol: String): BinOperator = {
+
+    def apply(symbol: String): BinOperator =
       symbol match {
         case "+" => BinOperator("+", (x, y) => x + y)
         case "*" => BinOperator("*", (x, y) => x * y)
         case "-" => BinOperator("-", (x, y) => x - y)
         case "/" => BinOperator("/", (x, y) => x / y)
       }
-    }
   }
 
   /**
@@ -31,8 +31,7 @@ object StringChallenges {
     * @param ccNumber The number
     * @return The masked number if ccNumber is not a string.
     */
-  def maskNumber(ccNumber: String): String = {
-
+  def maskNumber(ccNumber: String): String =
     ccNumber match {
       case nonNumber if !isValid(nonNumber) => nonNumber
       case number =>
@@ -43,7 +42,6 @@ object StringChallenges {
         val middle = number.substring(1, ccLen - 4).replaceAll("[0-9]", "#")
         initial + middle + tail
     }
-  }
 
   /**
     * Evaluates a mathematical expression given on infix notation (n m operation)
@@ -60,26 +58,24 @@ object StringChallenges {
     }
   }
 
-  def parseTokensToExpr(strTokens: List[String]): List[ExprToken] = {
+  def parseTokensToExpr(strTokens: List[String]): List[ExprToken] =
     strTokens.map {
       case tk if tk.matches("^[0-9]+(.[0-9]+)?") => Number(tk.toDouble)
       case tk if tk.equals("sqrt") => MonoOperator("sqrt", n => Math.sqrt(n))
       case tk if tk.equals("") => EmptyToken
       case tk => BinOperator(tk)
     }
-  }
 
-  def foldExpr(tokens: List[ExprToken]): List[ExprToken] = {
+  def foldExpr(tokens: List[ExprToken]): List[ExprToken] =
     tokens.foldLeft(List[ExprToken]())((acc, expr) => {
       (acc, expr) match {
         case (Nil, n: Number) => List(n)
-        case (init :+ Number(a) :+ Number(b), BinOperator(_, op)) => init ++ List(Number(op.apply(a, b)))
+        case (init :+ Number(a) :+ Number(b), BinOperator(_, op)) =>
+          init ++ List(Number(op.apply(a, b)))
         case (init :+ Number(a), MonoOperator(_, op)) => init ++ List(Number(op.apply(a)))
         case (l, e) => l ++ List(e)
       }
     })
-  }
-
 
   /**
     * Allow us to define if the given string follows the rules required to consider

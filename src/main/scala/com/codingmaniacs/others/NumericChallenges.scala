@@ -13,14 +13,13 @@ object NumericChallenges {
     * @return Sequence of Strings containing the elements replaced where the condition applies.
     */
   def fizzBuzz(s: Seq[Int]): Seq[String] = {
-    def fizzBuzzItem(number: Int): String = {
+    def fizzBuzzItem(number: Int): String =
       number match {
         case n if n % 3 == 0 && n % 5 == 0 => "FizzBuzz"
         case n if n % 3 == 0 => "Fizz"
         case n if n % 5 == 0 => "Buzz"
         case _ => number.toString
       }
-    }
 
     s.map(n => fizzBuzzItem(n))
   }

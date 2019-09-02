@@ -199,7 +199,14 @@ class CollectionChallengesSpec extends Specification {
 
     "pack similar consecutive items in a list (span)" in {
       val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
-      val expected = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
+      val expected = List(
+        List('a, 'a, 'a, 'a),
+        List('b),
+        List('c, 'c),
+        List('a, 'a),
+        List('d),
+        List('e, 'e, 'e, 'e)
+      )
       val packedList = CollectionChallenges.pack(elements)
       packedList mustEqual expected
     }
@@ -240,7 +247,14 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "count the occurrences and group the elements on a list" in {
-      val elements = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
+      val elements = List(
+        List('a, 'a, 'a, 'a),
+        List('b),
+        List('c, 'c),
+        List('a, 'a),
+        List('d),
+        List('e, 'e, 'e, 'e)
+      )
       val expected = List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))
       val res = CollectionChallenges.composableEncode(elements)
       res mustEqual expected

@@ -3,6 +3,7 @@ package com.codingmaniacs.codility
 import scala.annotation.tailrec
 
 object CollectionChallenges {
+
   /**
     * Finds the missing positive integer that can occur on the array
     *
@@ -31,9 +32,8 @@ object CollectionChallenges {
     * @param ns Number array
     * @return The unpaired element on the array
     */
-  def findUnpairedElement(ns: Array[Int]): Int = {
+  def findUnpairedElement(ns: Array[Int]): Int =
     ns.foldLeft(0)((x, y) => x ^ y)
-  }
 
   /**
     * Finds the minimum difference (Tape Equilibrium) on an array
@@ -46,18 +46,16 @@ object CollectionChallenges {
     val minus = (a: Int, b: Int) => Math.abs(a - b)
 
     @tailrec
-    def findEquilibrium(min: Int, a: List[Int], b: List[Int]): Int = {
+    def findEquilibrium(min: Int, a: List[Int], b: List[Int]): Int =
       b match {
         case List() => min
-        case List(el) => min
+        case List(_) => min
         case h :: tail =>
           val newMin = Math.min(min, minus((a ::: List(h)).sum, tail.sum))
           findEquilibrium(newMin, a ::: List(h), tail)
       }
-    }
 
     findEquilibrium(Int.MaxValue, List(), ns)
   }
-
 
 }
