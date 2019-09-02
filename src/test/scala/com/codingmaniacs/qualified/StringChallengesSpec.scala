@@ -1,5 +1,6 @@
 package com.codingmaniacs.qualified
 
+import com.codingmaniacs.qualified.StringChallenges.InvalidExpressionException
 import org.specs2.mutable.Specification
 
 class StringChallengesSpec extends Specification {
@@ -52,6 +53,18 @@ class StringChallengesSpec extends Specification {
     }
   }
   "The expression evaluator" should {
+    "fail when evaluating a invalid exception (mono)" in {
+      (StringChallenges.evaluate("sqrt") must throwA[InvalidExpressionException]).message must endWith(
+        s"A expression containing only operators is not valid"
+      )
+    }
+
+    "fail when evaluating a invalid exception (binary)" in {
+      (StringChallenges.evaluate("-") must throwA[InvalidExpressionException]).message must endWith(
+        s"A expression containing only operators is not valid"
+      )
+    }
+
     "evaluate a empty expresion" in {
       val res = StringChallenges.evaluate("")
       res mustEqual 0.0

@@ -4,13 +4,13 @@ object StringChallenges {
 
   sealed trait ExprToken
 
-  final case object EmptyToken extends ExprToken
-
   final case class Number(n: Double) extends ExprToken
 
   final case class BinOperator(symbol: String, op: (Double, Double) => Double) extends ExprToken
 
   final case class MonoOperator(symbol: String, op: Double => Double) extends ExprToken
+
+  final class InvalidExpressionException(msg: String) extends RuntimeException(msg)
 
   object BinOperator {
 
@@ -51,28 +51,33 @@ object StringChallenges {
     */
   def evaluate(expr: String): Double = {
     val solution = parseTokensToExpr _ andThen foldExpr
-    val result = solution(expr.split(" ").toList).lastOption
+    val result = solution(expr.split(" ").toList).lastOption.flatten
     result match {
+      case None => 0.0
+      case Some(BinOperator(_, _)) =>
+        throw new InvalidExpressionException("A expression containing only operators is not valid")
+      case Some(MonoOperator(_, _)) =>
+        throw new InvalidExpressionException("A expression containing only operators is not valid")
       case Some(Number(n)) => n
-      case Some(EmptyToken) => 0.0
     }
   }
 
-  def parseTokensToExpr(strTokens: List[String]): List[ExprToken] =
+  def parseTokensToExpr(strTokens: List[String]): List[Option[ExprToken]] =
     strTokens.map {
-      case tk if tk.matches("^[0-9]+(.[0-9]+)?") => Number(tk.toDouble)
-      case tk if tk.equals("sqrt") => MonoOperator("sqrt", n => Math.sqrt(n))
-      case tk if tk.equals("") => EmptyToken
-      case tk => BinOperator(tk)
+      case tk if tk.matches("^[0-9]+(.[0-9]+)?") => Some(Number(tk.toDouble))
+      case tk if tk.equals("sqrt") => Some(MonoOperator("sqrt", n => Math.sqrt(n)))
+      case tk if tk.equals("") => None
+      case tk => Some(BinOperator(tk))
     }
 
-  def foldExpr(tokens: List[ExprToken]): List[ExprToken] =
-    tokens.foldLeft(List[ExprToken]())((acc, expr) => {
+  def foldExpr(tokens: List[Option[ExprToken]]): List[Option[ExprToken]] =
+    tokens.foldLeft(List[Option[ExprToken]]())((acc, expr) => {
       (acc, expr) match {
-        case (Nil, n: Number) => List(n)
-        case (init :+ Number(a) :+ Number(b), BinOperator(_, op)) =>
-          init ++ List(Number(op.apply(a, b)))
-        case (init :+ Number(a), MonoOperator(_, op)) => init ++ List(Number(op.apply(a)))
+        case (Nil, n) => List(n)
+        case (init :+ Some(Number(a)) :+ Some(Number(b)), Some(BinOperator(_, op))) =>
+          init ++ List(Some(Number(op.apply(a, b))))
+        case (init :+ Some(Number(a)), Some(MonoOperator(_, op))) =>
+          init ++ List(Some(Number(op.apply(a))))
         case (l, e) => l ++ List(e)
       }
     })
