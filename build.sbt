@@ -17,7 +17,7 @@ lazy val library =
   new {
 
     object Version {
-      val specs2 = "4.4.1"
+      val specs2 = "4.7.1"
     }
 
     val specs2 = "org.specs2" %% "specs2-core" % Version.specs2
