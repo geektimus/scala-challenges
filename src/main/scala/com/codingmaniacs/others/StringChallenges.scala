@@ -12,8 +12,7 @@ object StringChallenges {
     * @param str String
     * @return Reverse representation of the string
     */
-  def flip(str: String): String =
-    str.foldRight("")((el, acc) => acc + el)
+  def flip(str: String): String = str.foldRight("")((el, acc) => acc + el)
 
   /**
     * Given a string it returns the number of words contained in the string
@@ -22,7 +21,8 @@ object StringChallenges {
     * @return Number of words found on the string using split method
     */
   def wordCountWithSplit(str: String): Int =
-    str.trim
+    str
+      .trim
       .split(" ")
       .map(w => w.trim)
       .count(w => !w.equals(""))
@@ -37,13 +37,14 @@ object StringChallenges {
     @tailrec
     def reduce(res: Int, currentChar: Option[Char], remaining: List[Char]): Int =
       (remaining, currentChar) match {
-        case (Nil, _) => res
-        case (h :: t, None) => reduce(res + 1, Some(h), t)
+        case (Nil, _)                                => res
+        case (h :: t, None)                          => reduce(res + 1, Some(h), t)
         case (h :: t, Some(c)) if c == 32 && h != 32 => reduce(res + 1, Some(h), t)
-        case (h :: t, _) => reduce(res, Some(h), t)
+        case (h :: t, _)                             => reduce(res, Some(h), t)
       }
 
     val characters = str.trim.toList
     reduce(0, None, characters)
   }
+
 }

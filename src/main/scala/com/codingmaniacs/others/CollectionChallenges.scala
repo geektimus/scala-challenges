@@ -8,10 +8,10 @@ object CollectionChallenges {
     @tailrec
     def lastIndexSeen(a: List[Int], s: List[Int]): List[Int] =
       (a, s) match {
-        case (List(), List()) => List()
-        case (ls, List()) => ls
+        case (List(), List())                           => List()
+        case (ls, List())                               => ls
         case (ina :+ endA, ins :+ endS) if endA == endS => lastIndexSeen(ina, ins)
-        case (ina :+ _, _) => lastIndexSeen(ina, s)
+        case (ina :+ _, _)                              => lastIndexSeen(ina, s)
       }
 
     lastIndexSeen(array.toList, slice.toList).length

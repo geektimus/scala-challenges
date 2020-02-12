@@ -23,6 +23,5 @@ object NumericChallenges {
     * @param d Maximum distance that the frog can jump
     * @return The minimal number of jumps from position X to a position equal to or greater than Y
     */
-  def frogJumps(x: Int, y: Int, d: Int): Int =
-    Math.ceil(Math.abs(x - y).toDouble / d.toDouble).toInt
+  def frogJumps(x: Int, y: Int, d: Int): Int = Math.ceil(Math.abs(x - y).toDouble / d.toDouble).toInt
 }

@@ -13,15 +13,15 @@ object CollectionChallenges {
   def findMissingInt(data: Seq[Int]): Int = {
     val sortedSetWithIndex = data.sorted.distinct.zip(1 to data.size)
     sortedSetWithIndex match {
-      case Nil => 1
+      case Nil                             => 1
       case Seq((x, y)) if x == y && x == 1 => 2
       case _ =>
-        val dropped = sortedSetWithIndex.dropWhile {
-          case (x, y) => x - y == 0
+        val dropped = sortedSetWithIndex.dropWhile { case (x, y) =>
+          x - y == 0
         }
         dropped.headOption match {
           case Some((_, y)) => y
-          case None => sortedSetWithIndex.length + 1
+          case None         => sortedSetWithIndex.length + 1
         }
     }
   }
@@ -32,8 +32,7 @@ object CollectionChallenges {
     * @param ns Number array
     * @return The unpaired element on the array
     */
-  def findUnpairedElement(ns: Array[Int]): Int =
-    ns.foldLeft(0)((x, y) => x ^ y)
+  def findUnpairedElement(ns: Array[Int]): Int = ns.foldLeft(0)((x, y) => x ^ y)
 
   /**
     * Finds the minimum difference (Tape Equilibrium) on an array
@@ -48,7 +47,7 @@ object CollectionChallenges {
     @tailrec
     def findEquilibrium(min: Int, a: List[Int], b: List[Int]): Int =
       b match {
-        case List() => min
+        case List()  => min
         case List(_) => min
         case h :: tail =>
           val newMin = Math.min(min, minus((a ::: List(h)).sum, tail.sum))

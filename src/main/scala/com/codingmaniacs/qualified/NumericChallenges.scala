@@ -20,10 +20,11 @@ object NumericChallenges {
 
     (lastDigit, lastTwoDigits) match {
       case (_, ltd) if ltd >= 11 && ltd <= 13 => "th"
-      case (1, _) => "st"
-      case (2, _) => "nd"
-      case (3, _) => "rd"
-      case _ => "th"
+      case (1, _)                             => "st"
+      case (2, _)                             => "nd"
+      case (3, _)                             => "rd"
+      case _                                  => "th"
     }
   }
+
 }

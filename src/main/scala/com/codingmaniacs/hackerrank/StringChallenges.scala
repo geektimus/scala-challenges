@@ -12,13 +12,14 @@ object StringChallenges {
     }
     r match {
       case str if str.length > 0 => str
-      case _ => "Empty String"
+      case _                     => "Empty String"
     }
   }
 
   val findGemstones: Seq[String] => Int = {
-    case Nil => 0
+    case Nil      => 0
     case h :: Nil => h.distinct.length
-    case list => list.reduce((a, b) => a intersect b).length
+    case list     => list.reduce((a, b) => a intersect b).length
   }
+
 }

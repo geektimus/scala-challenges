@@ -21,6 +21,7 @@ object StringChallenges {
         case "-" => BinOperator("-", (x, y) => x - y)
         case "/" => BinOperator("/", (x, y) => x / y)
       }
+
   }
 
   /**
@@ -65,13 +66,13 @@ object StringChallenges {
   def parseTokensToExpr(strTokens: List[String]): List[Option[ExprToken]] =
     strTokens.map {
       case tk if tk.matches("^[0-9]+(.[0-9]+)?") => Some(Number(tk.toDouble))
-      case tk if tk.equals("sqrt") => Some(MonoOperator("sqrt", n => Math.sqrt(n)))
-      case tk if tk.equals("") => None
-      case tk => Some(BinOperator(tk))
+      case tk if tk.equals("sqrt")               => Some(MonoOperator("sqrt", n => Math.sqrt(n)))
+      case tk if tk.equals("")                   => None
+      case tk                                    => Some(BinOperator(tk))
     }
 
   def foldExpr(tokens: List[Option[ExprToken]]): List[Option[ExprToken]] =
-    tokens.foldLeft(List[Option[ExprToken]]())((acc, expr) => {
+    tokens.foldLeft(List[Option[ExprToken]]()) { (acc, expr) =>
       (acc, expr) match {
         case (Nil, n) => List(n)
         case (init :+ Some(Number(a)) :+ Some(Number(b)), Some(BinOperator(_, op))) =>
@@ -80,7 +81,7 @@ object StringChallenges {
           init ++ List(Some(Number(op.apply(a))))
         case (l, e) => l ++ List(e)
       }
-    })
+    }
 
   /**
     * Allow us to define if the given string follows the rules required to consider
@@ -92,4 +93,5 @@ object StringChallenges {
     val pattern = "[0-9\\-]".r
     str.length > 5 && pattern.findFirstMatchIn(str).isDefined
   }
+
 }
