@@ -8,28 +8,28 @@ class CollectionChallengesSpec extends Specification {
     "show that [1] is a missing integer on an empty array" in {
       val numbers = Array[Int]()
       val expected = 1
-      val missingInteger = CollectionChallenges.findMissingInt(numbers)
+      val missingInteger = CollectionChallenges.findMissingInt(numbers.toSeq)
       missingInteger mustEqual expected
     }
 
     "show that [1] is a missing integer on [2]" in {
       val numbers = Array(2)
       val expected = 1
-      val missingInteger = CollectionChallenges.findMissingInt(numbers)
+      val missingInteger = CollectionChallenges.findMissingInt(numbers.toSeq)
       missingInteger mustEqual expected
     }
 
     "show that [2] is a missing integer on [1]" in {
       val numbers = Array(1)
       val expected = 2
-      val missingInteger = CollectionChallenges.findMissingInt(numbers)
+      val missingInteger = CollectionChallenges.findMissingInt(numbers.toSeq)
       missingInteger mustEqual expected
     }
 
     "show that [2] is a missing integer on [1]" in {
       val numbers = Array(1)
       val expected = 2
-      val missingInteger = CollectionChallenges.findMissingInt(numbers)
+      val missingInteger = CollectionChallenges.findMissingInt(numbers.toSeq)
       missingInteger mustEqual expected
     }
 
@@ -38,7 +38,7 @@ class CollectionChallengesSpec extends Specification {
       val numbers = Array(1, 3, 6, 4, 1, 2)
       // scalastyle:on magic.number
       val expected = 5
-      val missingInteger = CollectionChallenges.findMissingInt(numbers)
+      val missingInteger = CollectionChallenges.findMissingInt(numbers.toSeq)
       missingInteger mustEqual expected
     }
 
@@ -47,14 +47,14 @@ class CollectionChallengesSpec extends Specification {
       val numbers = Array(4, 1, 5, 6, 2)
       // scalastyle:on magic.number
       val expected = 3
-      val missingInteger = CollectionChallenges.findMissingInt(numbers)
+      val missingInteger = CollectionChallenges.findMissingInt(numbers.toSeq)
       missingInteger mustEqual expected
     }
 
     "show that [4] is a missing integer on [1, 2, 3]" in {
       val numbers = Array(1, 2, 3)
       val expected = 4
-      val missingInteger = CollectionChallenges.findMissingInt(numbers)
+      val missingInteger = CollectionChallenges.findMissingInt(numbers.toSeq)
       missingInteger mustEqual expected
     }
 
@@ -63,7 +63,7 @@ class CollectionChallengesSpec extends Specification {
       val numbers = Array(-1, -3)
       // scalastyle:on magic.number
       val expected = 1
-      val missingInteger = CollectionChallenges.findMissingInt(numbers)
+      val missingInteger = CollectionChallenges.findMissingInt(numbers.toSeq)
       missingInteger mustEqual expected
     }
   }
