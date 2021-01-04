@@ -163,29 +163,29 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "compress consecutive elements on a singleton list" in {
-      val elements = List('a)
-      val expected = List('a)
+      val elements = List("a")
+      val expected = List("a")
       val compressedList = CollectionChallenges.compress(elements)
       compressedList mustEqual expected
     }
 
     "compress consecutive elements on a list into one" in {
-      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
-      val expected = List('a, 'b, 'c, 'a, 'd, 'e)
+      val elements = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
+      val expected = List("a", "b", "c", "a", "d", "e")
       val compressedList = CollectionChallenges.compress(elements)
       compressedList mustEqual expected
     }
 
     "compress consecutive elements on a singleton list (folding)" in {
-      val elements = List('a)
-      val expected = List('a)
+      val elements = List("a")
+      val expected = List("a")
       val compressedList = CollectionChallenges.compressWithFold(elements)
       compressedList mustEqual expected
     }
 
     "compress consecutive elements on a list into one (folding)" in {
-      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
-      val expected = List('a, 'b, 'c, 'a, 'd, 'e)
+      val elements = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
+      val expected = List("a", "b", "c", "a", "d", "e")
       val compressedList = CollectionChallenges.compressWithFold(elements)
       compressedList mustEqual expected
     }
@@ -198,14 +198,14 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "pack similar consecutive items in a list (span)" in {
-      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+      val elements = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
       val expected = List(
-        List('a, 'a, 'a, 'a),
-        List('b),
-        List('c, 'c),
-        List('a, 'a),
-        List('d),
-        List('e, 'e, 'e, 'e)
+        List("a", "a", "a", "a"),
+        List("b"),
+        List("c", "c"),
+        List("a", "a"),
+        List("d"),
+        List("e", "e", "e", "e")
       )
       val packedList = CollectionChallenges.pack(elements)
       packedList mustEqual expected
@@ -219,8 +219,8 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "length encoding on a list (tailrec)" in {
-      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
-      val expected = List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))
+      val elements = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
+      val expected = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
       val lengthEncoded = CollectionChallenges.recursiveEncode(elements)
       lengthEncoded mustEqual expected
     }
@@ -233,8 +233,8 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "length encoding on a list (composition)" in {
-      val elements = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
-      val expected = List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))
+      val elements = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
+      val expected = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
       val lengthEncoded = CollectionChallenges.encodeComposed(elements)
       lengthEncoded mustEqual expected
     }
@@ -248,14 +248,14 @@ class CollectionChallengesSpec extends Specification {
 
     "count the occurrences and group the elements on a list" in {
       val elements = List(
-        List('a, 'a, 'a, 'a),
-        List('b),
-        List('c, 'c),
-        List('a, 'a),
-        List('d),
-        List('e, 'e, 'e, 'e)
+        List("a", "a", "a", "a"),
+        List("b"),
+        List("c", "c"),
+        List("a", "a"),
+        List("d"),
+        List("e", "e", "e", "e")
       )
-      val expected = List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))
+      val expected = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
       val res = CollectionChallenges.composableEncode(elements)
       res mustEqual expected
     }

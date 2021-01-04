@@ -5,16 +5,20 @@ import scala.annotation.tailrec
 object CollectionChallenges {
 
   def lastIndexOfSlice(array: Array[Int], slice: Array[Int]): Int = {
+
+    type Index = Int
+
     @tailrec
-    def lastIndexSeen(a: List[Int], s: List[Int]): List[Int] =
+    def lastIndexSeen(lastIndex: Index, a: Seq[Int], s: Seq[Int]): Index =
       (a, s) match {
-        case (List(), List())                           => List()
-        case (ls, List())                               => ls
-        case (ina :+ endA, ins :+ endS) if endA == endS => lastIndexSeen(ina, ins)
-        case (ina :+ _, _)                              => lastIndexSeen(ina, s)
+        case (Nil, _)                                   => lastIndex
+        case (_, Nil)                                   => lastIndex
+        case (ina :+ endA, ins :+ endS) if endA == endS => lastIndexSeen(lastIndex + 1, ina, ins)
+        case (ina :+ _, _)                              => lastIndexSeen(lastIndex + 1, ina, s)
+        case (_, _)                                     => lastIndex
       }
 
-    lastIndexSeen(array.toList, slice.toList).length
+    array.length - lastIndexSeen(0, array.toSeq, slice.toSeq)
   }
 
 }
