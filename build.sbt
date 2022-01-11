@@ -17,7 +17,7 @@ lazy val library =
   new {
 
     object Version {
-      val specs2 = "4.8.3"
+      val specs2 = "4.13.1"
     }
 
     val specs2 = "org.specs2" %% "specs2-core" % Version.specs2
@@ -51,17 +51,15 @@ lazy val commonSettings =
         "-unchecked",
         "-Xfatal-warnings",
         "-Xlint",
-        "-Xsource:2.13.4",
+        "-Xsource:2.13.7",
         "-Ywarn-dead-code",
         "-Ywarn-numeric-widen",
         "-Wunused:imports,params",
         "-Ywarn-value-discard"
       ),
-    parallelExecution.in(Test) := false,
-    unmanagedSourceDirectories.in(Compile) := Seq(scalaSource.in(Compile).value),
-    unmanagedSourceDirectories.in(Test) := Seq(scalaSource.in(Test).value),
-    logBuffered in Test := false,
-    publishArtifact in Test := false
+    Test / parallelExecution := false,
+    Test / logBuffered := false,
+    Test / publishArtifact := false
   )
 
 lazy val coverageSettings =
