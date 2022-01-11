@@ -18,6 +18,7 @@ object CollectionChallenges {
   }
 
   def findNumbers(start: Int, end: Int, predicate: Int => Boolean): Array[Int] = {
+    @tailrec
     def findNumbersRec(res: List[Int], rem: List[Int], predicate: Int => Boolean): Array[Int] =
       rem match {
         case Nil                       => res.toArray

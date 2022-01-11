@@ -4,19 +4,19 @@ import org.specs2.mutable.Specification
 
 class StringChallengesSpec extends Specification {
 
+  val emptyString = "Empty String"
+
   "The reduce by pairs function" should {
     "reduce an empty string" in {
       val s = ""
-      val expected = "Empty String"
       val result = StringChallenges.reduceByPairs(s)
-      result mustEqual expected
+      result mustEqual emptyString
     }
 
     "reduce an string with a pair of the same letter" in {
       val s = "aa"
-      val expected = "Empty String"
       val result = StringChallenges.reduceByPairs(s)
-      result mustEqual expected
+      result mustEqual emptyString
     }
 
     "reduce aaabccddd to abd" in {
@@ -28,9 +28,8 @@ class StringChallengesSpec extends Specification {
 
     "reduce baab to 'Empty String'" in {
       val s = "baab"
-      val expected = "Empty String"
       val result = StringChallenges.reduceByPairs(s)
-      result mustEqual expected
+      result mustEqual emptyString
     }
 
     "reduce aaabccbdeed to a" in {

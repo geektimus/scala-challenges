@@ -49,9 +49,9 @@ object CollectionChallenges {
     @tailrec
     def isPalindromeRec(rs: Boolean, ls: List[T]): Boolean =
       ls match {
-        case Nil         => rs
-        case List(_)     => rs
-        case (h :: tail) => isPalindromeRec(rs && (h == tail.last), tail.dropRight(1))
+        case Nil       => rs
+        case List(_)   => rs
+        case h :: tail => isPalindromeRec(rs && (h == tail.last), tail.dropRight(1))
       }
 
     isPalindromeRec(rs = true, list)

@@ -65,7 +65,7 @@ lazy val commonSettings =
 lazy val coverageSettings =
   Seq(
     coverageEnabled := true,
-    coverageMinimum := 90,
+    coverageMinimumStmtTotal := 90,
     coverageFailOnMinimum := true,
     coverageHighlighting := true
   )
