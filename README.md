@@ -5,6 +5,12 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/640e9a8ef7fc7f757aaf/maintainability)](https://codeclimate.com/github/geektimus/scala-challenges/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/640e9a8ef7fc7f757aaf/test_coverage)](https://codeclimate.com/github/geektimus/scala-challenges/test_coverage)
 
+Other Stats
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=geektimus_scala-challenges&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=geektimus_scala-challenges)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=geektimus_scala-challenges&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=geektimus_scala-challenges)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=geektimus_scala-challenges&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=geektimus_scala-challenges) |
+
 This repo will contain the solutions using Scala for challenges found on:
 
 * Books
@@ -171,3 +177,5 @@ sbt scalastyle
 ```bash
 sbt clean coverage test coverageReport
 ```
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=geektimus_scala-challenges)
