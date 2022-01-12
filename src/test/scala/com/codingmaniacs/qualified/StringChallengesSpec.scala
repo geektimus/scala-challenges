@@ -15,24 +15,6 @@ class StringChallengesSpec extends Specification {
       val res = StringChallenges.maskNumber(str)
       res mustEqual expected
     }
-    "mask a short string" in {
-      val str = "small"
-      val expected = "small"
-      val res = StringChallenges.maskNumber(str)
-      res mustEqual expected
-    }
-    "mask a medium number" in {
-      val str = "123456"
-      val expected = "1#3456"
-      val res = StringChallenges.maskNumber(str)
-      res mustEqual expected
-    }
-    "mask a medium string" in {
-      val str = "medium string"
-      val expected = "medium string"
-      val res = StringChallenges.maskNumber(str)
-      res mustEqual expected
-    }
     "mask a string with dashes" in {
       val str = "str-with-dashes"
       val expected = "str-with-dashes"
