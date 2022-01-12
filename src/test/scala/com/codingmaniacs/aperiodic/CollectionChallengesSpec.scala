@@ -3,7 +3,18 @@ package com.codingmaniacs.aperiodic
 import org.specs2.mutable.Specification
 
 class CollectionChallengesSpec extends Specification {
+
   "To prove that we know how to use list we" should {
+
+    val packedListGlobal: List[List[String]] = List(
+      List("a", "a", "a", "a"),
+      List("b"),
+      List("c", "c"),
+      List("a", "a"),
+      List("d"),
+      List("e", "e", "e", "e")
+    )
+
     "return the last element of a empty list as None" in {
       val numbers = List()
       val expected = None
@@ -199,16 +210,8 @@ class CollectionChallengesSpec extends Specification {
 
     "pack similar consecutive items in a list (span)" in {
       val elements = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
-      val expected = List(
-        List("a", "a", "a", "a"),
-        List("b"),
-        List("c", "c"),
-        List("a", "a"),
-        List("d"),
-        List("e", "e", "e", "e")
-      )
       val packedList = CollectionChallenges.pack(elements)
-      packedList mustEqual expected
+      packedList mustEqual packedListGlobal
     }
 
     "length encoding on a empty list (tailrec)" in {
@@ -247,14 +250,7 @@ class CollectionChallengesSpec extends Specification {
     }
 
     "count the occurrences and group the elements on a list" in {
-      val elements = List(
-        List("a", "a", "a", "a"),
-        List("b"),
-        List("c", "c"),
-        List("a", "a"),
-        List("d"),
-        List("e", "e", "e", "e")
-      )
+      val elements = packedListGlobal
       val expected = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
       val res = CollectionChallenges.composableEncode(elements)
       res mustEqual expected
